@@ -185,27 +185,37 @@ section {
     align-items: center;
     background: var(--offwhite);
     padding: 2rem 1rem;
-    padding-top: 220px; /* Space for the top plant canopy */
     text-align: center;
     position: relative;
 }
 
-/* Plant decoration – seamlessly integrated canopy (like reference) */
-.plant-top-banner {
+/* Pre-wedding photo background (Hero) */
+.hero-bg {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
+    height: 100%;
     z-index: 1;
-    pointer-events: none;
-    line-height: 0; /* Remove any gap below image */
+    overflow: hidden;
 }
 
-.plant-top-img {
+.hero-bg-img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
     display: block;
-    mix-blend-mode: multiply; /* Makes white background transparent */
-    opacity: 1;
+}
+
+.hero-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradient fade so text at bottom is highly legible */
+    background: linear-gradient(to bottom, rgba(253, 252, 249, 0.3) 0%, rgba(253, 252, 249, 0.95) 80%, rgba(253, 252, 249, 1) 100%);
 }
 
 .hero-content {
@@ -816,54 +826,44 @@ section {
 .site-footer {
     background: var(--offwhite);
     color: var(--text-dark);
-    padding: 4rem 0 0;
+    padding: 6rem 0;
     text-align: center;
     position: relative;
     overflow: hidden;
 }
 
-.footer-names {
-    font-family: var(--font-script);
-    font-size: 2.5rem;
-    color: var(--olive);
-    margin-bottom: 0.3rem;
-}
-
-.footer-date {
-    font-family: var(--font-sans);
-    font-size: 0.8rem;
-    letter-spacing: 3px;
-    color: var(--text-light);
-    margin-bottom: 0.5rem;
-}
-
-.footer-thankyou {
-    font-family: var(--font-serif);
-    font-size: 1rem;
-    color: var(--text-mid);
-    margin-bottom: 0.5rem;
-}
-
-.footer-esperamos {
-    font-family: var(--font-script);
-    font-size: 2.2rem;
-    color: var(--olive);
-    margin-bottom: 1rem;
-}
-
-/* Plant decoration – growing upward from bottom (seamless integration) */
-.plant-bottom-banner {
+/* Pre-wedding photo background (Footer) */
+.footer-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    line-height: 0; /* Remove any gap */
-    margin-top: 1.5rem;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
 }
 
-.plant-bottom-img {
+.footer-bg-img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
     display: block;
-    transform: scaleY(-1); /* Flip it to grow upward */
-    mix-blend-mode: multiply; /* Makes white background transparent */
-    opacity: 1;
+}
+
+.footer-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradient fade so top blends into previous section and text is legible */
+    background: linear-gradient(to top, rgba(253, 252, 249, 0.4) 0%, rgba(253, 252, 249, 0.95) 80%, rgba(253, 252, 249, 1) 100%);
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2;
 }
 
 /* =========================================
