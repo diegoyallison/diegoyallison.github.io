@@ -1,536 +1,345 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="utf-8">
-    <title>Jack & Rose - Free Wedding Website Template</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diego & Allison — Nuestra Boda</title>
+    <meta name="description" content="Te invitamos a celebrar nuestra boda — 13 de Junio de 2026">
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;600&display=swap" rel="stylesheet"> 
-
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
+<body>
 
-<body data-spy="scroll" data-target=".navbar" data-offset="51">
-    <!-- Navbar Start -->
-    <nav class="navbar fixed-top shadow-sm navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-lg-5">
-        <a href="index.html" class="navbar-brand d-block d-lg-none">
-            <h1 class="font-secondary text-white mb-n2">Jack <span class="text-primary">&</span> Rose</h1>
-        </a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-            <div class="navbar-nav ml-auto py-0">
-                <a href="#home" class="nav-item nav-link active">Home</a>
-                <a href="#about" class="nav-item nav-link">About</a>
-                <a href="#story" class="nav-item nav-link">Story</a>
-                <a href="#gallery" class="nav-item nav-link">Gallery</a>
+    <!-- Audio element -->
+    <audio id="bg-audio" loop preload="auto">
+        <source src="assets/audio/sjjm_S_132.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Floating audio FAB (mobile-friendly fallback) -->
+    <div id="audio-player" class="audio-fab" title="Reproducir canción">
+        <span class="material-icons-outlined audio-icon" id="audio-icon">play_arrow</span>
+    </div>
+
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section id="hero" class="hero-section">
+        <!-- Plant decoration — full-width top canopy like reference -->
+        <div class="plant-top-banner">
+            <img src="assets/images/planta.png" alt="Decoración botánica" class="plant-top-img">
+        </div>
+
+        <div class="hero-content fade-in">
+            <p class="pre-title">Nos casamos</p>
+            <h1 class="couple-names">Diego <span class="amp">&amp;</span> Allison</h1>
+            <div class="date-badge">
+                <span class="day">13</span>
+                <span class="month">Junio</span>
+                <span class="year">2026</span>
             </div>
-            <a href="index.html" class="navbar-brand mx-5 d-none d-lg-block">
-                <h1 class="font-secondary text-white mb-n2">Jack <span class="text-primary">&</span> Rose</h1>
+
+            <!-- Inline audio player in hero -->
+            <div class="hero-audio-player fade-in">
+                <button id="hero-play-btn" class="hero-play-btn" title="Reproducir canción">
+                    <span class="material-icons-outlined" id="hero-play-icon">play_arrow</span>
+                </button>
+                <div class="hero-audio-info">
+                    <p class="hero-audio-title">Ahora ya somos uno</p>
+                    <p class="hero-audio-sub">Canción 132 · Cantemos con gozo a Jehová</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator fade-in">
+            <span class="material-icons-outlined">expand_more</span>
+        </div>
+    </section>
+
+    <!-- ============================================
+         COUNTDOWN
+         ============================================ -->
+    <section id="timer" class="timer-section">
+        <div class="container fade-in">
+            <p class="section-subtitle">Cuenta regresiva</p>
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <span id="days" class="time-value">00</span>
+                    <span class="time-label">Días</span>
+                </div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-item">
+                    <span id="hours" class="time-value">00</span>
+                    <span class="time-label">Horas</span>
+                </div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-item">
+                    <span id="minutes" class="time-value">00</span>
+                    <span class="time-label">Min</span>
+                </div>
+                <div class="countdown-sep">:</div>
+                <div class="countdown-item">
+                    <span id="seconds" class="time-value">00</span>
+                    <span class="time-label">Seg</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         COUPLE PHOTO COLLAGE / CUTOUT
+         ============================================ -->
+    <section id="couple" class="couple-section">
+        <div class="container fade-in">
+            <div class="couple-collage">
+                <img src="assets/images/couple_cutout.png" alt="Diego y Allison" class="couple-cutout-img">
+            </div>
+            <p class="couple-quote">"Cordón de tres hilos no se rompe fácilmente."<br><small>— Eclesiastés 4:12</small></p>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CON LA BENDICIÓN DE DIOS
+         ============================================ -->
+    <section id="blessing" class="blessing-section">
+        <div class="container fade-in">
+            <h2 class="section-title script-font">Con la bendición de Dios</h2>
+            <div class="blessing-text">
+                <p>
+                    Con el amor y la guía de Jehová, hemos decidido unir nuestras vidas para siempre.
+                    Estamos profundamente agradecidos por cada paso que nos ha traído hasta aquí.
+                </p>
+                <p>
+                    Nos llena de alegría compartir este día tan especial contigo, porque tu presencia
+                    le dará un significado aún más hermoso a nuestra celebración.
+                </p>
+                <p class="signature">— Diego & Allison</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         GALERÍA DE FOTOS
+         ============================================ -->
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title script-font fade-in">Nuestra Historia</h2>
+            <p class="section-text fade-in">Cada momento juntos nos ha llevado a este día tan especial.</p>
+            <div class="photo-grid">
+                <div class="photo-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&q=80&w=600" alt="Foto 1">
+                </div>
+                <div class="photo-item photo-tall fade-in">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=600" alt="Foto 2">
+                </div>
+                <div class="photo-item fade-in">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=600" alt="Foto 3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CEREMONIA RELIGIOSA
+         ============================================ -->
+    <section id="ceremony" class="event-section">
+        <div class="container fade-in">
+            <span class="material-icons-outlined event-icon">church</span>
+            <h2 class="section-title script-font">Ceremonia Religiosa</h2>
+            <div class="event-details-block">
+                <div class="event-detail">
+                    <span class="material-icons-outlined">calendar_today</span>
+                    <p>Sábado, 13 de Junio de 2026</p>
+                </div>
+                <div class="event-detail">
+                    <span class="material-icons-outlined">schedule</span>
+                    <p>4:00 PM</p>
+                </div>
+                <div class="event-detail">
+                    <span class="material-icons-outlined">place</span>
+                    <p>Salón del Reino de los Testigos de Jehová</p>
+                    <p class="sub-detail">Calle Principal 123, Centro</p>
+                </div>
+            </div>
+            <a href="#" target="_blank" class="btn btn-outline">
+                <span class="material-icons-outlined">map</span> Ver ubicación
             </a>
-            <div class="navbar-nav mr-auto py-0">
-                <a href="#family" class="nav-item nav-link">Family</a>
-                <a href="#event" class="nav-item nav-link">Event</a>
-                <a href="#rsvp" class="nav-item nav-link">RSVP</a>
-                <a href="#contact" class="nav-item nav-link">Contact</a>
-            </div>
         </div>
-    </nav>
-    <!-- Navbar End -->
+    </section>
 
-
-    <!-- Carousel Start -->
-    <div class="container-fluid p-0 mb-5 pb-5" id="home">
-        <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item position-relative active" style="height: 100vh; min-height: 400px;">
-                    <img class="position-absolute w-100 h-100" src="img/carousel-1.jpg" style="object-fit: cover;">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div class="p-3" style="max-width: 900px;">
-                            <h1 class="display-1 font-secondary text-white mt-n3 mb-md-4">Jack & Rose</h1>
-                            <div class="d-inline-block border-top border-bottom border-light py-3 px-4">
-                                <h3 class="text-uppercase font-weight-normal text-white m-0" style="letter-spacing: 2px;">We're getting married</h3>
-                            </div>
-                            <button type="button" class="btn-play mx-auto" data-toggle="modal"
-                                data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-target="#videoModal">
-                                <span></span>
-                            </button>
-                        </div>
-                    </div>
+    <!-- ============================================
+         RECEPCIÓN
+         ============================================ -->
+    <section id="reception" class="event-section alt-bg">
+        <div class="container fade-in">
+            <span class="material-icons-outlined event-icon">celebration</span>
+            <h2 class="section-title script-font">Recepción</h2>
+            <div class="event-details-block">
+                <div class="event-detail">
+                    <span class="material-icons-outlined">calendar_today</span>
+                    <p>Sábado, 13 de Junio de 2026</p>
                 </div>
-                <div class="carousel-item position-relative" style="height: 100vh; min-height: 400px;">
-                    <img class="position-absolute w-100 h-100" src="img/carousel-2.jpg" style="object-fit: cover;">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                        <div class="p-3" style="max-width: 900px;">
-                            <h1 class="display-1 font-secondary text-white mt-n3 mb-md-4">Jack & Rose</h1>
-                            <div class="d-inline-block border-top border-bottom border-light py-3 px-4">
-                                <h3 class="text-uppercase font-weight-normal text-white m-0" style="letter-spacing: 2px;">We're getting married</h3>
-                            </div>
-                            <button type="button" class="btn-play mx-auto" data-toggle="modal"
-                                data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-target="#videoModal">
-                                <span></span>
-                            </button>
-                        </div>
-                    </div>
+                <div class="event-detail">
+                    <span class="material-icons-outlined">schedule</span>
+                    <p>6:00 PM</p>
+                </div>
+                <div class="event-detail">
+                    <span class="material-icons-outlined">place</span>
+                    <p>Hacienda Los Olivos</p>
+                    <p class="sub-detail">Av. Las Palmas 456, Afueras</p>
                 </div>
             </div>
-            <a class="carousel-control-prev justify-content-start" href="#header-carousel" data-slide="prev">
-                <div class="btn btn-primary px-0" style="width: 68px; height: 68px;">
-                    <span class="carousel-control-prev-icon mt-3"></span>
-                </div>
-            </a>
-            <a class="carousel-control-next justify-content-end" href="#header-carousel" data-slide="next">
-                <div class="btn btn-primary px-0" style="width: 68px; height: 68px;">
-                    <span class="carousel-control-next-icon mt-3"></span>
-                </div>
+            <a href="#" target="_blank" class="btn btn-outline">
+                <span class="material-icons-outlined">map</span> Ver ubicación
             </a>
         </div>
-    </div>
-    <!-- Carousel End -->
+    </section>
 
+    <!-- ============================================
+         ITINERARIO (Download Button)
+         ============================================ -->
+    <section id="itinerary" class="itinerary-section">
+        <div class="container fade-in">
+            <span class="material-icons-outlined event-icon">description</span>
+            <h2 class="section-title script-font">Itinerario</h2>
+            <p class="section-text">Descarga el itinerario completo de nuestra celebración.</p>
+            <a href="assets/itinerario.pdf" download class="btn btn-download">
+                <span class="material-icons-outlined">download</span> Descargar Itinerario
+            </a>
+        </div>
+    </section>
 
-    <!-- Video Modal Start -->
-    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>        
-                    <!-- 16:9 aspect ratio -->
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always" allow="autoplay"></iframe>
-                    </div>
+    <!-- ============================================
+         PASES
+         ============================================ -->
+    <section id="passes" class="passes-section">
+        <div class="container fade-in">
+            <h2 class="section-title script-font">Pases</h2>
+            <p class="section-text">Esta invitación es válida para</p>
+            <div class="passes-badge">
+                <span class="passes-number">2</span>
+            </div>
+            <p class="passes-note">personas</p>
+        </div>
+    </section>
+
+    <!-- ============================================
+         CÓDIGO DE VESTIMENTA
+         ============================================ -->
+    <section id="dresscode" class="dresscode-section">
+        <div class="container fade-in">
+            <span class="material-icons-outlined event-icon">checkroom</span>
+            <h2 class="section-title script-font">Código de Vestimenta</h2>
+            <p class="dresscode-type">Formal Elegante</p>
+
+            <div class="dresscode-gallery">
+                <div class="dresscode-card">
+                    <img src="assets/images/suit_miniature.png" alt="Traje formal masculino">
+                    <h4>Caballeros</h4>
+                    <p>Traje formal elegante en tonos oscuros (azul marino, gris, negro).</p>
                 </div>
+                <div class="dresscode-card">
+                    <img src="assets/images/dress_miniature.png" alt="Vestido formal femenino">
+                    <h4>Damas</h4>
+                    <p>Vestido elegante y modesto, por debajo de la rodilla.</p>
+                </div>
+            </div>
+
+            <div class="dresscode-rules">
+                <h4>Por favor, considerar:</h4>
+                <ul>
+                    <li><span class="rule-no">✕</span> No usar vestidos blancos, derivados del blanco ni color crema.</li>
+                    <li><span class="rule-no">✕</span> No usar vestidos rojos ni derivados del rojo.</li>
+                    <li><span class="rule-no">✕</span> No usar verde olivo ni blanco en la vestimenta.</li>
+                    <li><span class="rule-yes">✓</span> Se sugieren tonos azul marino, gris, negro, rosa empolvado o tonos tierra.</li>
+                </ul>
             </div>
         </div>
-    </div>
-    <!-- Video Modal End -->
+    </section>
 
-
-    <!-- About Start -->
-    <div class="container-fluid py-5" id="about">
-        <div class="container py-5">
-            <div class="section-title position-relative text-center">
-                <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">About</h6>
-                <h1 class="font-secondary display-4">Groom & Bride</h1>
-                <i class="far fa-heart text-dark"></i>
-            </div>
-            <div class="row m-0 mb-4 mb-md-0 pb-2 pb-md-0">
-                <div class="col-md-6 p-0 text-center text-md-right">
-                    <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-5">
-                        <h3 class="mb-3">The Groom</h3>
-                        <p>Lorem elitr magna stet rebum dolores sed. Est stet labore est lorem lorem at amet sea, eos tempor rebum, labore amet ipsum sea lorem, stet rebum eirmod amet. Kasd clita kasd stet amet est dolor elitr.</p>
-                        <h3 class="font-secondary font-weight-normal text-muted mb-3"><i class="fa fa-male text-primary pr-3"></i>Jack</h3>
-                        <div class="position-relative">
-                            <a class="btn btn-outline-primary btn-square mr-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-primary btn-square mr-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-primary btn-square mr-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 p-0" style="min-height: 400px;">
-                    <img class="position-absolute w-100 h-100" src="img/about-1.jpg" style="object-fit: cover;">
-                </div>
-            </div>
-            <div class="row m-0">
-                <div class="col-md-6 p-0" style="min-height: 400px;">
-                    <img class="position-absolute w-100 h-100" src="img/about-2.jpg" style="object-fit: cover;">
-                </div>
-                <div class="col-md-6 p-0 text-center text-md-left">
-                    <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-5">
-                        <h3 class="mb-3">The Bride</h3>
-                        <p>Lorem elitr magna stet rebum dolores sed. Est stet labore est lorem lorem at amet sea, eos tempor rebum, labore amet ipsum sea lorem, stet rebum eirmod amet. Kasd clita kasd stet amet est dolor elitr.</p>
-                        <h3 class="font-secondary font-weight-normal text-muted mb-3"><i class="fa fa-female text-primary pr-3"></i>Rose</h3>
-                        <div class="position-relative">
-                            <a class="btn btn-outline-primary btn-square mr-1" href="#"><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-outline-primary btn-square mr-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-primary btn-square mr-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a class="btn btn-outline-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- About End -->
-
-
-    <!-- Story Start -->
-    <div class="container-fluid py-5" id="story">
-        <div class="container pt-5 pb-3">
-            <div class="section-title position-relative text-center">
-                <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">Story</h6>
-                <h1 class="font-secondary display-4">Our Love Story</h1>
-                <i class="far fa-heart text-dark"></i>
-            </div>
-            <div class="container timeline position-relative p-0">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-right">
-                        <img class="img-fluid mr-md-3" src="img/story-1.jpg" alt="">
-                    </div>
-                    <div class="col-md-6 text-center text-md-left">
-                        <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 ml-md-3">
-                            <h4 class="mb-2">First Meet</h4>
-                            <p class="text-uppercase mb-2">01 Jan 2050</p>
-                            <p class="m-0">Lorem elitr magna stet rebum dolores sed. Est stet labore est lorem lorem at amet sea, eos tempor rebum, labore amet ipsum sea lorem, stet rebum eirmod amet. Kasd clita kasd stet amet est dolor elitr.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-right">
-                        <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3">
-                            <h4 class="mb-2">First Date</h4>
-                            <p class="text-uppercase mb-2">01 Jan 2050</p>
-                            <p class="m-0">Lorem elitr magna stet rebum dolores sed. Est stet labore est lorem lorem at amet sea, eos tempor rebum, labore amet ipsum sea lorem, stet rebum eirmod amet. Kasd clita kasd stet amet est dolor elitr.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-center text-md-left">
-                        <img class="img-fluid ml-md-3" src="img/story-2.jpg" alt="">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-right">
-                        <img class="img-fluid mr-md-3" src="img/story-3.jpg" alt="">
-                    </div>
-                    <div class="col-md-6 text-center text-md-left">
-                        <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 ml-md-3">
-                            <h4 class="mb-2">Proposal</h4>
-                            <p class="text-uppercase mb-2">01 Jan 2050</p>
-                            <p class="m-0">Lorem elitr magna stet rebum dolores sed. Est stet labore est lorem lorem at amet sea, eos tempor rebum, labore amet ipsum sea lorem, stet rebum eirmod amet. Kasd clita kasd stet amet est dolor elitr.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-right">
-                        <div class="h-100 d-flex flex-column justify-content-center bg-secondary p-4 mr-md-3">
-                            <h4 class="mb-2">Enagagement</h4>
-                            <p class="text-uppercase mb-2">01 Jan 2050</p>
-                            <p class="m-0">Lorem elitr magna stet rebum dolores sed. Est stet labore est lorem lorem at amet sea, eos tempor rebum, labore amet ipsum sea lorem, stet rebum eirmod amet. Kasd clita kasd stet amet est dolor elitr.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 text-center text-md-left">
-                        <img class="img-fluid ml-md-3" src="img/story-4.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Story End -->
-
-
-    <!-- Gallery Start -->
-    <div class="container-fluid bg-gallery" id="gallery" style="padding: 120px 0; margin: 90px 0;">
-        <div class="section-title position-relative text-center" style="margin-bottom: 120px;">
-            <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">Gallery</h6>
-            <h1 class="font-secondary display-4 text-white">Our Photo Gallery</h1>
-            <i class="far fa-heart text-white"></i>
-        </div>
-        <div class="owl-carousel gallery-carousel">
-            <div class="gallery-item">
-                <img class="img-fluid w-100" src="img/gallery-1.jpg" alt="">
-                <a href="img/gallery-1.jpg" data-lightbox="gallery">
-                    <i class="fa fa-2x fa-plus text-white"></i>
-                </a>
-            </div>
-            <div class="gallery-item">
-                <img class="img-fluid w-100" src="img/gallery-2.jpg" alt="">
-                <a href="img/gallery-2.jpg" data-lightbox="gallery">
-                    <i class="fa fa-2x fa-plus text-white"></i>
-                </a>
-            </div>
-            <div class="gallery-item">
-                <img class="img-fluid w-100" src="img/gallery-3.jpg" alt="">
-                <a href="img/gallery-3.jpg" data-lightbox="gallery">
-                    <i class="fa fa-2x fa-plus text-white"></i>
-                </a>
-            </div>
-            <div class="gallery-item">
-                <img class="img-fluid w-100" src="img/gallery-4.jpg" alt="">
-                <a href="img/gallery-4.jpg" data-lightbox="gallery">
-                    <i class="fa fa-2x fa-plus text-white"></i>
-                </a>
-            </div>
-            <div class="gallery-item">
-                <img class="img-fluid w-100" src="img/gallery-5.jpg" alt="">
-                <a href="img/gallery-5.jpg" data-lightbox="gallery">
-                    <i class="fa fa-2x fa-plus text-white"></i>
-                </a>
-            </div>
-            <div class="gallery-item">
-                <img class="img-fluid w-100" src="img/gallery-6.jpg" alt="">
-                <a href="img/gallery-6.jpg" data-lightbox="gallery">
-                    <i class="fa fa-2x fa-plus text-white"></i>
+    <!-- ============================================
+         SUGERENCIA DE CANCIONES (reemplaza regalos)
+         ============================================ -->
+    <section id="songs" class="songs-section">
+        <div class="container fade-in">
+            <span class="material-icons-outlined event-icon">music_note</span>
+            <h2 class="section-title script-font">Sugerencia de Canciones</h2>
+            <p class="section-text">
+                ¿Tienes una canción que te gustaría que sonara en nuestra celebración?
+                ¡Déjanos tu sugerencia!
+            </p>
+            <div class="song-suggestions">
+                <p class="song-hint">Canciones apropiadas y de buen gusto son bienvenidas.</p>
+                <a href="https://wa.me/1234567890?text=Hola!%20Sugiero%20la%20canción:%20" target="_blank" class="btn btn-outline">
+                    <span class="material-icons-outlined">send</span> Enviar sugerencia
                 </a>
             </div>
         </div>
-    </div>
-    <!-- Gallery End -->
+    </section>
 
-
-    <!-- Event Start -->
-    <div class="container-fluid py-5" id="event">
-        <div class="container py-5">
-            <div class="section-title position-relative text-center">
-                <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">Event</h6>
-                <h1 class="font-secondary display-4">Our Wedding Event</h1>
-                <i class="far fa-heart text-dark"></i>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-6 text-center">
-                    <h5 class="font-weight-normal text-muted mb-3 pb-3">Clita ipsum aliquyam dolor diam dolores elitr nonumy. Rebum sea vero ipsum eirmod tempor kasd. Diam amet lorem erat eos sit lorem elitr justo</h5>
+    <!-- ============================================
+         CANCIÓN: Ahora ya somos uno
+         ============================================ -->
+    <section id="our-song" class="our-song-section">
+        <div class="container fade-in">
+            <h2 class="section-title script-font">Nuestra Canción</h2>
+            <p class="section-text">"Ahora ya somos uno" — Cantemos con gozo a Jehová, canción 132</p>
+            <div class="song-player-card">
+                <div class="song-art">
+                    <span class="material-icons-outlined">library_music</span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6 border-right border-primary">
-                    <div class="text-center text-md-right mr-md-3 mb-4 mb-md-0">
-                        <img class="img-fluid mb-4" src="img/event-1.jpg" alt="">
-                        <h4 class="mb-3">The Reception</h4>
-                        <p class="mb-2">123 Street, New York, USA</p>
-                        <p class="mb-0">12:00AM - 13:00PM</p>
-                    </div>
+                <div class="song-info">
+                    <p class="song-title">Ahora ya somos uno</p>
+                    <p class="song-artist">Cantemos con gozo a Jehová · Canción 132</p>
                 </div>
-                <div class="col-md-6">
-                    <div class="text-center text-md-left ml-md-3">
-                        <img class="img-fluid mb-4" src="img/event-2.jpg" alt="">
-                        <h4 class="mb-3">Wedding Party</h4>
-                        <p class="mb-2">123 Street, New York, USA</p>
-                        <p class="mb-0">12:00AM - 13:00PM</p>
-                    </div>
-                </div>
+                <button id="song-play-btn" class="song-play-btn" title="Reproducir">
+                    <span class="material-icons-outlined" id="song-play-icon">play_arrow</span>
+                </button>
             </div>
-        </div>
-    </div>
-    <!-- Event End -->
-
-
-    <!-- Friends & Family Start -->
-    <div class="container-fluid py-5" id="family">
-        <div class="container pt-5 pb-3">
-            <div class="section-title position-relative text-center">
-                <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">Friends & Family</h6>
-                <h1 class="font-secondary display-4">Groomsmen & Bridesmaid</h1>
-                <i class="far fa-heart text-dark"></i>
-            </div>
-            <div class="row">
-                <div class="col-12 text-center mb-2">
-                    <ul class="list-inline mb-4" id="portfolio-flters">
-                        <li class="btn btn-outline-primary font-weight-bold m-1 py-2 px-4" data-filter=".first">Groomsmen</li>
-                        <li class="btn btn-outline-primary font-weight-bold m-1 py-2 px-4" data-filter=".second">Bridesmaid</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row portfolio-container">
-                <div class="col-lg-4 col-md-6 mb-4 portfolio-item first">
-                    <div class="position-relative mb-2">
-                        <img class="img-fluid w-100" src="img/groomsmen-1.jpg" alt="">
-                        <div class="bg-secondary text-center p-4">
-                            <h4 class="mb-3">Full Name</h4>
-                            <p class="text-uppercase">Best Friend</p>
-                            <div class="d-inline-block">
-                                <a class="mx-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4 portfolio-item second">
-                    <div class="position-relative mb-2">
-                        <img class="img-fluid w-100" src="img/bridesmaid-1.jpg" alt="">
-                        <div class="bg-secondary text-center p-4">
-                            <h4 class="mb-3">Full Name</h4>
-                            <p class="text-uppercase">Best Friend</p>
-                            <div class="d-inline-block">
-                                <a class="mx-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4 portfolio-item first">
-                    <div class="position-relative mb-2">
-                        <img class="img-fluid w-100" src="img/groomsmen-2.jpg" alt="">
-                        <div class="bg-secondary text-center p-4">
-                            <h4 class="mb-3">Full Name</h4>
-                            <p class="text-uppercase">Best Friend</p>
-                            <div class="d-inline-block">
-                                <a class="mx-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4 portfolio-item second">
-                    <div class="position-relative mb-2">
-                        <img class="img-fluid w-100" src="img/bridesmaid-2.jpg" alt="">
-                        <div class="bg-secondary text-center p-4">
-                            <h4 class="mb-3">Full Name</h4>
-                            <p class="text-uppercase">Best Friend</p>
-                            <div class="d-inline-block">
-                                <a class="mx-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4 portfolio-item first">
-                    <div class="position-relative mb-2">
-                        <img class="img-fluid w-100" src="img/groomsmen-3.jpg" alt="">
-                        <div class="bg-secondary text-center p-4">
-                            <h4 class="mb-3">Full Name</h4>
-                            <p class="text-uppercase">Best Friend</p>
-                            <div class="d-inline-block">
-                                <a class="mx-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4 portfolio-item second">
-                    <div class="position-relative mb-2">
-                        <img class="img-fluid w-100" src="img/bridesmaid-3.jpg" alt="">
-                        <div class="bg-secondary text-center p-4">
-                            <h4 class="mb-3">Full Name</h4>
-                            <p class="text-uppercase">Best Friend</p>
-                            <div class="d-inline-block">
-                                <a class="mx-2" href="#"><i class="fab fa-twitter"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a class="mx-2" href="#"><i class="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Friends & Family End -->
-
-
-    <!-- RSVP Start -->
-    <div class="container-fluid py-5" id="rsvp">
-        <div class="container py-5">
-            <div class="section-title position-relative text-center">
-                <h6 class="text-uppercase text-primary mb-3" style="letter-spacing: 3px;">RSVP</h6>
-                <h1 class="font-secondary display-4">Join Our Party</h1>
-                <i class="far fa-heart text-dark"></i>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="text-center">
-                        <form>
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <input type="text" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Your Name"/>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <input type="email" class="form-control bg-secondary border-0 py-4 px-3" placeholder="Your Email"/>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-sm-6">
-                                    <select class="form-control bg-secondary border-0" style="height: 52px;">
-                                        <option>Number of Guest</option>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <select class="form-control bg-secondary border-0" style="height: 52px;">
-                                        <option>I'm Attending</option>
-                                        <option>All Events</option>
-                                        <option>Wedding Party</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control bg-secondary border-0 py-2 px-3" rows="5" placeholder="Message" required="required"></textarea>
-                            </div>
-                            <div>
-                                <button class="btn btn-primary font-weight-bold py-3 px-5" type="submit">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- RSVP End -->
-
-
-    <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-white py-5" id="contact" style="margin-top: 90px;">
-        <div class="container text-center py-5">
-            <div class="section-title position-relative text-center">
-                <h1 class="font-secondary display-3 text-white">Thank You</h1>
-                <i class="far fa-heart text-white"></i>
-            </div>
-            <div class="d-flex justify-content-center mb-4">
-                <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-lg btn-outline-light btn-lg-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                <a class="btn btn-lg btn-outline-light btn-lg-square" href="#"><i class="fab fa-instagram"></i></a>
-            </div>
-            <div class="d-flex justify-content-center py-2">
-                <p class="text-white" href="#">info@example.com</p>
-                <span class="px-3">|</span>
-                <p class="text-white" href="#">+012 345 6789</p>
-            </div>
-            <p class="m-0">&copy; <a class="text-primary" href="#">Domain Name</a>. Designed by <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
+            <p class="song-source">
+                <a href="https://www.jw.org/es/biblioteca/musica-canciones/cantemos-con-gozo/132-ahora-ya-somos-uno/" target="_blank" rel="noopener">
+                    Escuchar en jw.org <span class="material-icons-outlined link-icon">open_in_new</span>
+                </a>
             </p>
         </div>
-    </div>
-    <!-- Footer End -->
+    </section>
 
+    <!-- ============================================
+         CONFIRMAR ASISTENCIA (RSVP)
+         ============================================ -->
+    <section id="rsvp" class="rsvp-section">
+        <div class="container fade-in">
+            <h2 class="section-title script-font rsvp-title">Confirmar Asistencia</h2>
+            <p class="section-text rsvp-text">
+                Nos encantaría contar contigo. Por favor confirma tu asistencia antes del
+                <strong>15 de Mayo de 2026</strong>.
+            </p>
+            <a href="https://wa.me/1234567890?text=Hola!%20Confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Diego%20y%20Allison." target="_blank" class="btn btn-rsvp">
+                <span class="material-icons-outlined">favorite</span> Confirmar Asistencia
+            </a>
+        </div>
+    </section>
 
-    <!-- Scroll to Bottom -->
-    <i class="fa fa-2x fa-angle-down text-white scroll-to-bottom"></i>
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="site-footer">
+        <h2 class="footer-names">D <span class="amp">&amp;</span> A</h2>
+        <p class="footer-date">13 · 06 · 2026</p>
+        <p class="footer-thankyou">¡Gracias por acompañarnos!</p>
+        <p class="footer-esperamos">¡Te Esperamos!</p>
+        <!-- Plant decoration — growing upward from bottom like reference -->
+        <div class="plant-bottom-banner">
+            <img src="assets/images/planta.png" alt="Decoración botánica" class="plant-bottom-img">
+        </div>
+    </footer>
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-outline-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
-
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/isotope/isotope.pkgd.min.js"></script>
-    <script src="lib/lightbox/js/lightbox.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="js/script.js"></script>
 </body>
-
 </html>
