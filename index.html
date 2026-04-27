@@ -33,7 +33,11 @@
     <section id="hero" class="hero-section">
         <!-- Pre-wedding photo background -->
         <div class="hero-bg">
-            <img src="assets/images/hero_prewedding.png" alt="Preboda en Ancón" class="hero-bg-img">
+            <picture>
+                <source media="(min-width: 1024px)" srcset="assets/images/laptop/foto-17.jpg">
+                <source media="(min-width: 768px)" srcset="assets/images/tablet/foto-17.jpg">
+                <img src="assets/images/mobile/foto-17.jpg" alt="Nos casamos - Portada" class="hero-bg-img">
+            </picture>
             <div class="hero-bg-overlay"></div>
         </div>
 
@@ -99,9 +103,10 @@
     <section id="couple" class="couple-section">
         <div class="container fade-in">
             <div class="couple-collage">
-                <img src="assets/images/couple_cutout.png" alt="Diego y Allison" class="couple-cutout-img">
+                <!-- Usamos una imagen cuadrada personalizada para garantizar que los rostros jamás se corten y pese poco -->
+                <img src="assets/images/polaroid-11.jpg" alt="Diego y Allison" class="couple-styled-img">
             </div>
-            <p class="couple-quote">"Cordón de tres hilos no se rompe fácilmente."<br><small>— Eclesiastés 4:12</small></p>
+            <p class="couple-quote">"Y una cuerda triple no se rompe fácilmente"<br><small>— Eclesiastés 4:12</small></p>
         </div>
     </section>
 
@@ -126,23 +131,58 @@
     </section>
 
     <!-- ============================================
-         GALERÍA DE FOTOS
+         GALERÍA DE FOTOS (CARRUSEL)
          ============================================ -->
     <section id="gallery" class="gallery-section">
         <div class="container">
-            <h2 class="section-title script-font fade-in">Nuestra Historia</h2>
+            <h2 class="section-title script-font fade-in">Un Amor Escrito en las Estrellas</h2>
             <p class="section-text fade-in">Cada momento juntos nos ha llevado a este día tan especial.</p>
-            <div class="photo-grid">
-                <div class="photo-item fade-in">
-                    <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&q=80&w=600" alt="Foto 1">
+            
+            <div class="carousel-wrapper fade-in">
+                <button class="carousel-btn prev-btn" id="carousel-prev" title="Anterior">
+                    <span class="material-icons-outlined">chevron_left</span>
+                </button>
+                
+                <div class="carousel-viewport">
+                    <div class="carousel-track" id="gallery-track">
+                        <!-- Las fotos reales de preboda se colocarán aquí -->
+                        <div class="carousel-slide current">
+                            <picture>
+                                <source media="(min-width: 1024px)" srcset="assets/images/laptop/foto-31.jpg">
+                                <source media="(min-width: 768px)" srcset="assets/images/tablet/foto-31.jpg">
+                                <img src="assets/images/mobile/foto-31.jpg" alt="Preboda 1" class="carousel-img">
+                            </picture>
+                        </div>
+                        <div class="carousel-slide">
+                            <picture>
+                                <source media="(min-width: 1024px)" srcset="assets/images/laptop/foto-57.jpg">
+                                <source media="(min-width: 768px)" srcset="assets/images/tablet/foto-57.jpg">
+                                <img src="assets/images/mobile/foto-57.jpg" alt="Preboda 2" class="carousel-img">
+                            </picture>
+                        </div>
+                        <div class="carousel-slide">
+                            <picture>
+                                <source media="(min-width: 1024px)" srcset="assets/images/laptop/foto-15.jpg">
+                                <source media="(min-width: 768px)" srcset="assets/images/tablet/foto-15.jpg">
+                                <img src="assets/images/mobile/foto-15.jpg" alt="Preboda 3" class="carousel-img">
+                            </picture>
+                        </div>
+                        <div class="carousel-slide">
+                            <picture>
+                                <source media="(min-width: 1024px)" srcset="assets/images/laptop/foto-23.jpg">
+                                <source media="(min-width: 768px)" srcset="assets/images/tablet/foto-23.jpg">
+                                <img src="assets/images/mobile/foto-23.jpg" alt="Preboda 4" class="carousel-img">
+                            </picture>
+                        </div>
+                    </div>
                 </div>
-                <div class="photo-item photo-tall fade-in">
-                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=600" alt="Foto 2">
-                </div>
-                <div class="photo-item fade-in">
-                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=600" alt="Foto 3">
-                </div>
+
+                <button class="carousel-btn next-btn" id="carousel-next" title="Siguiente">
+                    <span class="material-icons-outlined">chevron_right</span>
+                </button>
             </div>
+            
+            <div class="carousel-indicators" id="carousel-indicators"></div>
         </div>
     </section>
 
@@ -217,16 +257,38 @@
     </section>
 
     <!-- ============================================
-         PASES
+         PASES (Cargados dinámicamente)
          ============================================ -->
     <section id="passes" class="passes-section">
         <div class="container fade-in">
             <h2 class="section-title script-font">Pases</h2>
-            <p class="section-text">Esta invitación es válida para</p>
-            <div class="passes-badge">
-                <span class="passes-number">2</span>
+            
+            <div id="passes-content" style="display: none;">
+                <p class="section-text guest-names-text" id="guest-names">Nuestros Invitados</p>
+                <p class="section-text">Hemos reservado para ustedes:</p>
+                
+                <div class="passes-grid">
+                    <div class="pass-card">
+                        <div class="passes-badge">
+                            <span class="passes-number" id="guest-count">1</span>
+                        </div>
+                        <p class="passes-note">Pases Personales</p>
+                    </div>
+                    <div class="pass-card">
+                        <div class="passes-badge table-badge">
+                            <span class="passes-number" id="guest-table">-</span>
+                        </div>
+                        <p class="passes-note">Mesa</p>
+                    </div>
+                </div>
             </div>
-            <p class="passes-note">personas</p>
+            
+            <!-- Loading and Error States -->
+            <div id="passes-loading" class="passes-status-msg">Cargando información de tu invitación...</div>
+            <div id="passes-error" class="passes-status-msg" style="display: none;">No se pudo encontrar tu invitación. Por favor, verifica el enlace.</div>
+            <div id="passes-empty" class="passes-status-msg" style="display: none;">
+                <p class="section-text">Esta invitación es válida para los destinatarios especificados.</p>
+            </div>
         </div>
     </section>
 
@@ -237,52 +299,33 @@
         <div class="container fade-in">
             <span class="material-icons-outlined event-icon">checkroom</span>
             <h2 class="section-title script-font">Código de Vestimenta</h2>
-            <p class="dresscode-type">Formal Elegante</p>
+            <p class="dresscode-type">Elegante y Modesto</p>
 
             <div class="dresscode-gallery">
                 <div class="dresscode-card">
-                    <img src="assets/images/suit_miniature.png" alt="Traje formal masculino">
+                    <img src="assets/images/suit_miniature.png" alt="Traje formal masculino" class="framed-img">
                     <h4>Caballeros</h4>
-                    <p>Traje formal elegante en tonos oscuros (azul marino, gris, negro).</p>
+                    <p>Traje formal elegante.</p>
                 </div>
                 <div class="dresscode-card">
-                    <img src="assets/images/dress_miniature.png" alt="Vestido formal femenino">
+                    <img src="assets/images/dress_miniature.png" alt="Vestido formal femenino" class="framed-img">
                     <h4>Damas</h4>
-                    <p>Vestido elegante y modesto, por debajo de la rodilla.</p>
+                    <p>Vestido elegante y modesto.</p>
                 </div>
             </div>
 
             <div class="dresscode-rules">
                 <h4>Por favor, considerar:</h4>
                 <ul>
-                    <li><span class="rule-no">✕</span> No usar vestidos blancos, derivados del blanco ni color crema.</li>
-                    <li><span class="rule-no">✕</span> No usar vestidos rojos ni derivados del rojo.</li>
-                    <li><span class="rule-no">✕</span> No usar verde olivo ni blanco en la vestimenta.</li>
-                    <li><span class="rule-yes">✓</span> Se sugieren tonos azul marino, gris, negro, rosa empolvado o tonos tierra.</li>
+                    <li><span class="rule-no">✕</span> No vestidos blancos, crema, rojos ni derivados.</li>
+                    <li><span class="rule-no">✕</span> No verde olivo ni derivados.</li>
+                    <li><span class="rule-yes">✓</span> Sí traje y vestido.</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- ============================================
-         SUGERENCIA DE CANCIONES (reemplaza regalos)
-         ============================================ -->
-    <section id="songs" class="songs-section">
-        <div class="container fade-in">
-            <span class="material-icons-outlined event-icon">music_note</span>
-            <h2 class="section-title script-font">Sugerencia de Canciones</h2>
-            <p class="section-text">
-                ¿Tienes una canción que te gustaría que sonara en nuestra celebración?
-                ¡Déjanos tu sugerencia!
-            </p>
-            <div class="song-suggestions">
-                <p class="song-hint">Canciones apropiadas y de buen gusto son bienvenidas.</p>
-                <a href="https://wa.me/1234567890?text=Hola!%20Sugiero%20la%20canción:%20" target="_blank" class="btn btn-outline">
-                    <span class="material-icons-outlined">send</span> Enviar sugerencia
-                </a>
-            </div>
-        </div>
-    </section>
+
 
     <!-- ============================================
          CANCIÓN: Ahora ya somos uno

@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // ======================================================
     // 2. COUNTDOWN TIMER — June 13, 2026 at 4:00 PM
     // ======================================================
-    const target = new Date('June 13, 2026 16:00:00').getTime();
-    const daysEl   = document.getElementById('days');
-    const hoursEl  = document.getElementById('hours');
-    const minsEl   = document.getElementById('minutes');
-    const secsEl   = document.getElementById('seconds');
+    const target = new Date('June 13, 2026 11:00:00').getTime();
+    const daysEl = document.getElementById('days');
+    const hoursEl = document.getElementById('hours');
+    const minsEl = document.getElementById('minutes');
+    const secsEl = document.getElementById('seconds');
 
     function pad(n) { return n < 10 ? '0' + n : n; }
 
@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
             daysEl.textContent = hoursEl.textContent = minsEl.textContent = secsEl.textContent = '00';
             return;
         }
-        daysEl.textContent  = pad(Math.floor(diff / 864e5));
-        hoursEl.textContent = pad(Math.floor((diff % 864e5)  / 36e5));
-        minsEl.textContent  = pad(Math.floor((diff % 36e5)   / 6e4));
-        secsEl.textContent  = pad(Math.floor((diff % 6e4)    / 1e3));
+        daysEl.textContent = pad(Math.floor(diff / 864e5));
+        hoursEl.textContent = pad(Math.floor((diff % 864e5) / 36e5));
+        minsEl.textContent = pad(Math.floor((diff % 36e5) / 6e4));
+        secsEl.textContent = pad(Math.floor((diff % 6e4) / 1e3));
     }
 
     tick();
@@ -44,13 +44,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // ======================================================
     // 3. AUDIO — Keep Hero, FAB, and Song Card in sync
     // ======================================================
-    const bgAudio      = document.getElementById('bg-audio');
-    const fab          = document.getElementById('audio-player');
-    const fabIcon      = document.getElementById('audio-icon');
-    const heroBtn      = document.getElementById('hero-play-btn');
-    const heroIcon     = document.getElementById('hero-play-icon');
-    const songBtn      = document.getElementById('song-play-btn');
-    const songIcon     = document.getElementById('song-play-icon');
+    const bgAudio = document.getElementById('bg-audio');
+    const fab = document.getElementById('audio-player');
+    const fabIcon = document.getElementById('audio-icon');
+    const heroBtn = document.getElementById('hero-play-btn');
+    const heroIcon = document.getElementById('hero-play-icon');
+    const songBtn = document.getElementById('song-play-btn');
+    const songIcon = document.getElementById('song-play-icon');
 
     let isPlaying = false;
 
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Hero button
         if (heroIcon) heroIcon.textContent = icon;
-        if (heroBtn)  heroBtn.classList.toggle('playing', playing);
+        if (heroBtn) heroBtn.classList.toggle('playing', playing);
 
         // Song card button
         if (songIcon) songIcon.textContent = icon;
@@ -87,4 +87,104 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // When audio ends naturally
     bgAudio.addEventListener('ended', () => syncUI(false));
+
+    // ======================================================
+    // 4. GOOGLE SHEETS INTEGRATION (Dynamic Passes)
+    // ======================================================
+    // Reemplaza esta URL con el enlace de tu Google Sheet publicado como CSV
+    const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRom-JWAVHCwhQRXFmF78lIgp5EGIcPYD-VU4ruSzoj08RxEhzPinHvOdU5SC8AJfNZKXlmx8702M_k/pub?gid=0&single=true&output=csv";
+
+    // Función para obtener parámetros de la URL
+    function getQueryParam(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const val = urlParams.get(param);
+        return val ? val.trim() : null;
+    }
+
+    const invitadoId = getQueryParam('invitado');
+    const passesContent = document.getElementById('passes-content');
+    const passesLoading = document.getElementById('passes-loading');
+    const passesError = document.getElementById('passes-error');
+    const passesEmpty = document.getElementById('passes-empty');
+
+    if (invitadoId) {
+        // Fetch real al CSV
+        fetch(SHEET_CSV_URL)
+            .then(response => response.text())
+            .then(csvText => {
+                // Parseo manual sencillo de CSV separando por saltos de línea (manejando \r\n de Windows/Google)
+                const rows = csvText.split(/\r?\n/).map(row => row.split(',').map(cell => cell.trim()));
+                // Asumiendo columnas: ID, Nombres, NumeroPases, Mesa
+                const guestData = rows.find(row => row[0] && row[0] === invitadoId);
+
+                passesLoading.style.display = 'none';
+
+                if (guestData) {
+                    passesContent.style.display = 'block';
+                    document.getElementById('guest-names').textContent = guestData[1] || 'Invitados Especiales';
+                    document.getElementById('guest-count').textContent = guestData[2] || '1';
+                    document.getElementById('guest-table').textContent = guestData[3] || '-';
+                } else {
+                    passesError.style.display = 'block';
+                }
+            })
+            .catch(err => {
+                console.error("Error cargando pases:", err);
+                passesLoading.style.display = 'none';
+                passesError.style.display = 'block';
+            });
+    } else {
+        // Vista general sin parámetro especial
+        passesLoading.style.display = 'none';
+        passesEmpty.style.display = 'block';
+    }
+
+    // ======================================================
+    // 5. CAROUSEL LOGIC
+    // ======================================================
+    const track = document.getElementById('gallery-track');
+    const slides = track ? Array.from(track.children) : [];
+    const nextButton = document.getElementById('carousel-next');
+    const prevButton = document.getElementById('carousel-prev');
+    const dotsNav = document.getElementById('carousel-indicators');
+
+    if (slides.length > 0 && nextButton && prevButton && dotsNav) {
+        // Create indicator dots dynamically
+        slides.forEach((_, idx) => {
+            const dot = document.createElement('div');
+            dot.classList.add('indicator-dot');
+            if (idx === 0) dot.classList.add('active');
+            dotsNav.appendChild(dot);
+        });
+
+        const dots = Array.from(dotsNav.children);
+        let currentIndex = 0;
+
+        function moveToSlide(index) {
+            track.style.transform = 'translateX(-' + (index * 100) + '%)';
+            dots.forEach(d => d.classList.remove('active'));
+            dots[index].classList.add('active');
+            currentIndex = index;
+        }
+
+        nextButton.addEventListener('click', () => {
+            let nextIndex = currentIndex + 1;
+            if (nextIndex >= slides.length) nextIndex = 0;
+            moveToSlide(nextIndex);
+        });
+
+        prevButton.addEventListener('click', () => {
+            let prevIndex = currentIndex - 1;
+            if (prevIndex < 0) prevIndex = slides.length - 1;
+            moveToSlide(prevIndex);
+        });
+
+        dotsNav.addEventListener('click', e => {
+            const targetDot = e.target.closest('.indicator-dot');
+            if (!targetDot) return;
+            const targetIndex = dots.findIndex(dot => dot === targetDot);
+            moveToSlide(targetIndex);
+        });
+    }
+
 });

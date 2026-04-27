@@ -208,14 +208,21 @@ section {
     display: block;
 }
 
+/* Ensure picture wrappers fill their containers to avoid intrinsic size blowing out layouts */
+picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 .hero-bg-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    /* Gradient fade so text at bottom is highly legible */
-    background: linear-gradient(to bottom, rgba(253, 252, 249, 0.3) 0%, rgba(253, 252, 249, 0.95) 80%, rgba(253, 252, 249, 1) 100%);
+    /* Gradient fade so text at bottom is highly legible. Slightly darker near top to contrast olive text */
+    background: linear-gradient(to bottom, rgba(253, 252, 249, 0.45) 0%, rgba(253, 252, 249, 0.95) 80%, rgba(253, 252, 249, 1) 100%);
 }
 
 .hero-content {
@@ -285,58 +292,71 @@ section {
 
 .pre-title {
     font-family: var(--font-sans);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 700;
     letter-spacing: 6px;
     text-transform: uppercase;
-    color: var(--text-mid);
+    color: var(--olive-dark);
     margin-bottom: 0.8rem;
+    text-shadow: 0 1px 4px rgba(255,255,255,0.8), 0 2px 4px rgba(0,0,0,0.15);
 }
 
 .couple-names {
     font-family: var(--font-script);
     font-size: 5.5rem;
-    color: var(--olive);
+    font-weight: 700; /* Más fuerte */
+    color: #213018; /* Verde olivo mucho más intenso/profundo */
     line-height: 1.1;
     margin-bottom: 1.5rem;
+    /* Doble sombra: una luz blanca para despegar del fondo y una sombra oscura para el contraste rudo */
+    text-shadow: 0 0 16px rgba(255,255,255,0.8), 2px 4px 6px rgba(0,0,0,0.3);
 }
 
 .amp {
     font-family: var(--font-serif);
     font-size: 2.5rem;
-    color: var(--gold);
+    font-weight: 700;
+    color: #ad823a; /* Dorado más oscurecido para no perderse en luz */
     display: inline-block;
     margin: 0 8px;
     vertical-align: middle;
+    text-shadow: 0 0 10px rgba(255,255,255,0.6), 1px 2px 3px rgba(0,0,0,0.25);
 }
 
 .date-badge {
     display: flex;
     align-items: center;
     gap: 12px;
-    border: 1.5px solid var(--gold-light);
+    border: 2px solid #ad823a; /* Borde dorado consistente */
     padding: 10px 28px;
     border-radius: 50px;
+    background: rgba(255,255,255,0.4);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .date-badge .day {
     font-family: var(--font-serif);
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--olive);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #213018; /* Verde intenso */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
 }
 
 .date-badge .month {
     font-family: var(--font-sans);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 3px;
-    color: var(--text-mid);
+    color: var(--olive-dark);
 }
 
 .date-badge .year {
     font-family: var(--font-serif);
-    font-size: 1.4rem;
-    color: var(--gold);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ad823a; /* Dorado intenso */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .scroll-indicator {
@@ -407,14 +427,29 @@ section {
 }
 
 .couple-collage {
-    max-width: 400px;
-    margin: 0 auto 2rem;
+    max-width: 380px;
+    margin: 0 auto 3rem;
+    position: relative;
+    padding: 0 10px;
 }
 
-.couple-cutout-img {
-    border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(87,107,74,0.12);
-    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.08));
+.couple-styled-img {
+    width: 100%;
+    aspect-ratio: 1 / 1.05; /* Casi cuadrado, forma clásica de polaroid/retrato */
+    object-fit: cover;
+    object-position: center 25%; /* Enfoca hacia arriba para que los rostros jamás se corten */
+    background: #fff;
+    padding: 16px 16px 50px 16px; /* Borde estilo foto instantánea elegante */
+    border-radius: 4px; /* Esquinas de papel reales */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
+    display: block;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: rotate(-2deg); /* Ligera inclinación natural */
+}
+
+.couple-styled-img:hover {
+    transform: rotate(0deg) scale(1.03) translateY(-5px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.12), 0 2px 5px rgba(0,0,0,0.06);
 }
 
 .couple-quote {
@@ -457,38 +492,103 @@ section {
 }
 
 /* =========================================
-   GALLERY
+   GALERÍA (CARRUSEL)
    ========================================= */
 .gallery-section {
     background: var(--offwhite);
 }
 
-.photo-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 2rem;
+.carousel-wrapper {
+    position: relative;
+    max-width: 600px;
+    margin: 2rem auto 0;
+    display: flex;
+    align-items: center;
 }
 
-.photo-item {
-    border-radius: 12px;
+.carousel-viewport {
     overflow: hidden;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    flex: 1;
 }
 
-.photo-item img {
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
     width: 100%;
-    height: 100%;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    max-width: 100%; /* Force slide to viewport width */
+    flex-shrink: 0;
+}
+
+.carousel-slide img, .carousel-img {
+    width: 100%;
+    height: 450px;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    display: block;
 }
 
-.photo-item:hover img {
-    transform: scale(1.04);
+.carousel-btn {
+    background: #fff;
+    color: var(--olive);
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: absolute;
+    z-index: 10;
+    transition: var(--ease-medium);
 }
 
-.photo-tall {
-    grid-row: span 2;
+.carousel-btn:hover {
+    background: var(--olive);
+    color: #fff;
+}
+
+.carousel-btn.prev-btn {
+    left: -22px;
+}
+
+.carousel-btn.next-btn {
+    right: -22px;
+}
+
+/* Mobile adjust for carousel buttons so they aren't hidden */
+@media (max-width: 640px) {
+    .carousel-btn.prev-btn { left: 4px; }
+    .carousel-btn.next-btn { right: 4px; }
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1.5rem;
+}
+
+.indicator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--olive-light);
+    opacity: 0.4;
+    cursor: pointer;
+    transition: var(--ease-medium);
+}
+
+.indicator-dot.active {
+    opacity: 1;
+    background: var(--olive);
+    transform: scale(1.2);
 }
 
 /* =========================================
@@ -559,6 +659,32 @@ section {
     padding: 5rem 0;
 }
 
+.passes-grid {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin: 2rem auto;
+    flex-wrap: wrap;
+}
+
+.pass-card {
+    text-align: center;
+}
+
+.guest-names-text {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    color: var(--olive);
+    font-weight: 600;
+    margin: 1rem 0;
+}
+
+.passes-status-msg {
+    margin-top: 2rem;
+    font-style: italic;
+    color: var(--text-light);
+}
+
 .passes-badge {
     width: 120px;
     height: 120px;
@@ -567,8 +693,17 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 1.5rem auto;
+    margin: 0 auto 1.5rem;
     background: linear-gradient(135deg, rgba(198,168,124,0.08), rgba(198,168,124,0.02));
+}
+
+.passes-badge.table-badge {
+    border-color: var(--olive);
+    background: linear-gradient(135deg, rgba(87,107,74,0.08), rgba(87,107,74,0.02));
+}
+
+.passes-badge.table-badge .passes-number {
+    color: var(--olive-dark);
 }
 
 .passes-number {
@@ -576,6 +711,7 @@ section {
     font-size: 4rem;
     font-weight: 600;
     color: var(--olive);
+    line-height: 1;
 }
 
 .passes-note {
@@ -625,19 +761,26 @@ section {
     width: 100%;
     max-height: 200px;
     object-fit: contain;
-    margin: 0 auto 1rem;
-    border-radius: 8px;
+    margin: 0 auto 1.5rem;
+}
+
+.framed-img {
+    border: 4px solid var(--beige);
+    border-radius: 4px !important;
+    box-shadow: 0 0 0 2px var(--olive), 0 4px 12px rgba(0,0,0,0.1);
+    padding: 6px;
+    background: #fff;
 }
 
 .dresscode-card h4 {
     font-family: var(--font-serif);
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: var(--olive);
     margin-bottom: 0.5rem;
 }
 
 .dresscode-card p {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--text-mid);
 }
 
