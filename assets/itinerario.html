@@ -11,14 +11,34 @@
       size: A4 landscape;
       margin: 0;
     }
+    @media print {
+      body {
+        width: 100%;
+        height: 100%;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+      }
+      .page {
+        padding: 10px 155px !important; /* Reduced top/bottom padding to "crop" */
+        min-height: 0 !important;
+        height: 100% !important;
+      }
+      .branch-left, .branch-right {
+        position: absolute !important; /* Print doesn't like fixed as much */
+      }
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; font-variant-numeric: normal; font-feature-settings: 'onum' 0, 'lnum' 1; }
 
     body {
-      width: 297mm;
-      height: 210mm;
+      min-height: 100vh;
+      margin: 0;
       background: #f5f0eb;
       font-family: 'Playfair Display', Georgia, serif;
-      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
       position: relative;
     }
 
@@ -31,16 +51,18 @@
         radial-gradient(ellipse at 20% 50%, rgba(180,200,160,0.08) 0%, transparent 60%),
         radial-gradient(ellipse at 80% 50%, rgba(180,200,160,0.08) 0%, transparent 60%);
       pointer-events: none;
+      z-index: 0;
     }
 
     /* ── Ramas decorativas (SVG inline via pseudo) ── */
     .branch-left, .branch-right {
-      position: absolute;
+      position: fixed; /* Fixed to keep them in corners even if scrolling */
       top: 0;
       height: 100%;
       width: 140px;
       display: flex;
       align-items: center;
+      z-index: 1;
     }
     .branch-left  { left: 0; }
     .branch-right { right: 0; transform: scaleX(-1); }
@@ -55,13 +77,62 @@
     .page {
       position: relative;
       width: 100%;
-      height: 100%;
+      max-width: 1000px; /* Limit width for landscape feel on large screens */
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 14px 155px 10px;
-      z-index: 1;
+      padding: 40px 155px;
+      z-index: 2;
+      box-sizing: border-box;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .page {
+        padding: 40px 60px;
+      }
+      .branch-left, .branch-right {
+        width: 80px;
+        opacity: 0.3;
+      }
+      .branch-left svg, .branch-right svg {
+        width: 80px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 30px 20px;
+      }
+      .branch-left, .branch-right {
+        display: none; /* Hide branches on very small screens to save space */
+      }
+      .timeline-wrapper {
+        height: auto !important;
+        margin-top: 30px !important;
+      }
+      .timeline-line {
+        display: none; /* Vertical stack is better for mobile */
+      }
+      .timeline-items {
+        position: static !important;
+        flex-direction: column !important;
+        height: auto !important;
+        gap: 40px;
+      }
+      .tl-item {
+        width: 100%;
+      }
+      .tl-dot, .tl-time, .tl-icon, .tl-label {
+        position: static !important;
+        transform: none !important;
+        margin: 5px 0;
+      }
+      .tl-dot {
+        margin: 0 auto 10px;
+      }
     }
 
     /* Bloque de cabecera compacto */
@@ -368,50 +439,28 @@
       <div class="tl-item">
         <div class="tl-dot"></div>
         <div class="tl-time">2:00 PM</div>
-        <div class="tl-icon">📸</div>
-        <div class="tl-label">
-          <strong>Gran Entrada</strong>
-          <span>Llegada de los esposos & fotos</span>
-        </div>
-      </div>
-
-      <!-- 4 Bailes -->
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">3:00 PM</div>
         <div class="tl-icon">💃</div>
         <div class="tl-label">
-          <strong>Bailes</strong>
-          <span>Primer baile & bailes familiares</span>
+          <strong>Primer Baile</strong>
+          <span>Llegada de los esposos y primer baile</span>
         </div>
       </div>
 
-      <!-- 5 Palabras -->
+      <!-- 4 Banquete -->
       <div class="tl-item">
         <div class="tl-dot"></div>
-        <div class="tl-time">3:45 PM</div>
-        <div class="tl-icon">🎤</div>
-        <div class="tl-label">
-          <strong>Palabras</strong>
-          <span>Mensajes de familias</span>
-        </div>
-      </div>
-
-      <!-- 6 Banquete -->
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">4:30 PM</div>
+        <div class="tl-time">2:30 PM</div>
         <div class="tl-icon">🥂</div>
         <div class="tl-label">
           <strong>Banquete</strong>
-          <span>Cena & brindis</span>
+          <span>Inicio del banquete</span>
         </div>
       </div>
 
-      <!-- 7 Sorpresas -->
+      <!-- 5 Sorpresas -->
       <div class="tl-item">
         <div class="tl-dot"></div>
-        <div class="tl-time">6:00 PM</div>
+        <div class="tl-time">5:00 PM</div>
         <div class="tl-icon">🎉</div>
         <div class="tl-label">
           <strong>Sorpresas</strong>
