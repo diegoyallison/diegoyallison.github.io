@@ -191,9 +191,19 @@ document.addEventListener('DOMContentLoaded', () => {
         let currentIndex = 0;
 
         function moveToSlide(index) {
-            track.style.transform = 'translateX(-' + (index * 100) + '%)';
+            if (!track || slides.length === 0) return;
+            
+            // Move track
+            track.style.transform = `translateX(-${index * 100}%)`;
+            
+            // Update dots
             dots.forEach(d => d.classList.remove('active'));
-            dots[index].classList.add('active');
+            if (dots[index]) dots[index].classList.add('active');
+            
+            // Update current class on slides for potential CSS usage or accessibility
+            slides.forEach(s => s.classList.remove('current'));
+            if (slides[index]) slides[index].classList.add('current');
+            
             currentIndex = index;
         }
 
