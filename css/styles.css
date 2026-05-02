@@ -535,6 +535,7 @@ picture {
     cursor: grab;
     user-select: none;
     -webkit-user-drag: none;
+    touch-action: pan-y;
 }
 
 .carousel-track:active {

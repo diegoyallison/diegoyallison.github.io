@@ -257,8 +257,17 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Touch events
-        track.addEventListener('touchstart', (e) => handleSwipeStart(e.touches[0].clientX), { passive: true });
-        track.addEventListener('touchend', (e) => handleSwipeEnd(e.changedTouches[0].clientX), { passive: true });
+        track.addEventListener('touchstart', (e) => {
+            handleSwipeStart(e.touches[0].clientX);
+        }, { passive: true });
+
+        track.addEventListener('touchend', (e) => {
+            handleSwipeEnd(e.changedTouches[0].clientX);
+        }, { passive: true });
+
+        track.addEventListener('touchcancel', () => {
+            isDragging = false;
+        }, { passive: true });
 
         // Mouse events
         track.addEventListener('mousedown', (e) => {
