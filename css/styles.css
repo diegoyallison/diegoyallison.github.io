@@ -17,7 +17,7 @@
     /* Fonts */
     --font-serif: 'Cormorant Garamond', Georgia, serif;
     --font-script: 'Great Vibes', cursive;
-    --font-sans: 'Montserrat', 'Segoe UI', sans-serif;
+    --font-sans: 'Lato', 'Montserrat', 'Segoe UI', sans-serif;
 
     /* Transitions */
     --ease-slow: 0.9s cubic-bezier(.25,.46,.45,.94);
@@ -44,6 +44,9 @@ body {
     line-height: 1.7;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    /* Prevent old-style (roman-looking) figures from Cormorant Garamond */
+    font-feature-settings: 'lnum' 1, 'onum' 0;
+    font-variant-numeric: lining-nums;
 }
 
 img {
@@ -397,9 +400,13 @@ picture {
 
 .time-value {
     font-size: 3rem;
-    font-weight: 300;
+    font-weight: 600;
     color: var(--olive);
     line-height: 1;
+    font-family: var(--font-sans);
+    font-feature-settings: 'lnum' 1;
+    font-variant-numeric: lining-nums;
+    letter-spacing: 1px;
 }
 
 .time-label {
@@ -676,7 +683,7 @@ picture {
     font-size: 1.6rem;
     color: var(--olive);
     font-weight: 600;
-    margin: 1rem 0;
+    margin: 1rem auto;
 }
 
 .passes-status-msg {
@@ -707,11 +714,14 @@ picture {
 }
 
 .passes-number {
-    font-family: var(--font-serif);
+    font-family: var(--font-sans);
     font-size: 4rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--olive);
     line-height: 1;
+    font-feature-settings: 'lnum' 1;
+    font-variant-numeric: lining-nums;
+    letter-spacing: 1px;
 }
 
 .passes-note {

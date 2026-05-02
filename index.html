@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Lato:wght@300;400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
@@ -17,9 +17,12 @@
 </head>
 <body>
 
-    <!-- Audio element -->
-    <audio id="bg-audio" loop preload="auto">
-        <source src="assets/audio/sjjm_S_132.mp3" type="audio/mpeg">
+    <!-- Audio elements -->
+    <audio id="hero-audio" loop preload="auto">
+        <source src="assets/audio/cancion_jw.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="our-song-audio" loop preload="auto">
+        <source src="assets/audio/conmigo_siempre.mp3" type="audio/mpeg">
     </audio>
 
     <!-- Floating audio FAB (mobile-friendly fallback) -->
@@ -103,8 +106,12 @@
     <section id="couple" class="couple-section">
         <div class="container fade-in">
             <div class="couple-collage">
-                <!-- Usamos una imagen cuadrada personalizada para garantizar que los rostros jamás se corten y pese poco -->
-                <img src="assets/images/polaroid-11.jpg" alt="Diego y Allison" class="couple-styled-img">
+                <!-- Imagen principal responsiva con foto-37.jpg -->
+                <picture>
+                    <source media="(min-width: 1024px)" srcset="assets/images/laptop/foto-37.jpg">
+                    <source media="(min-width: 768px)" srcset="assets/images/tablet/foto-37.jpg">
+                    <img src="assets/images/mobile/foto-37.jpg" alt="Diego y Allison" class="couple-styled-img" style="width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                </picture>
             </div>
             <p class="couple-quote">"Y una cuerda triple no se rompe fácilmente"<br><small>— Eclesiastés 4:12</small></p>
         </div>
@@ -135,7 +142,7 @@
          ============================================ -->
     <section id="gallery" class="gallery-section">
         <div class="container">
-            <h2 class="section-title script-font fade-in">Un Amor Escrito en las Estrellas</h2>
+            <h2 class="section-title script-font fade-in">¡ De la mano de Jehová, nuestro amor no tiene fin !</h2>
             <p class="section-text fade-in">Cada momento juntos nos ha llevado a este día tan especial.</p>
             
             <div class="carousel-wrapper fade-in">
@@ -167,11 +174,18 @@
                                 <img src="assets/images/mobile/foto-15.jpg" alt="Preboda 3" class="carousel-img">
                             </picture>
                         </div>
+                         <div class="carousel-slide">
+                            <picture>
+                                <source media="(min-width: 1024px)" srcset="assets/images/laptop/foto-39.jpg">
+                                <source media="(min-width: 768px)" srcset="assets/images/tablet/foto-39.jpg">
+                                <img src="assets/images/mobile/foto-39.jpg" alt="Preboda 4" class="carousel-img">
+                            </picture>
+                        </div>
                         <div class="carousel-slide">
                             <picture>
                                 <source media="(min-width: 1024px)" srcset="assets/images/laptop/foto-23.jpg">
                                 <source media="(min-width: 768px)" srcset="assets/images/tablet/foto-23.jpg">
-                                <img src="assets/images/mobile/foto-23.jpg" alt="Preboda 4" class="carousel-img">
+                                <img src="assets/images/mobile/foto-23.jpg" alt="Preboda 5" class="carousel-img">
                             </picture>
                         </div>
                     </div>
@@ -191,7 +205,7 @@
          ============================================ -->
     <section id="ceremony" class="event-section">
         <div class="container fade-in">
-            <span class="material-icons-outlined event-icon">church</span>
+            <span class="material-icons-outlined event-icon">diamond</span>
             <h2 class="section-title script-font">Ceremonia Religiosa</h2>
             <div class="event-details-block">
                 <div class="event-detail">
@@ -200,15 +214,15 @@
                 </div>
                 <div class="event-detail">
                     <span class="material-icons-outlined">schedule</span>
-                    <p>4:00 PM</p>
+                    <p>11:00 AM</p>
                 </div>
                 <div class="event-detail">
                     <span class="material-icons-outlined">place</span>
                     <p>Salón del Reino de los Testigos de Jehová</p>
-                    <p class="sub-detail">Calle Principal 123, Centro</p>
+                    <p class="sub-detail">Calle San Francisco de Asis Mz. R1 Lt. 2-5</p>
                 </div>
             </div>
-            <a href="#" target="_blank" class="btn btn-outline">
+            <a href="https://maps.app.goo.gl/nxzBDpXD9XLeD5217" target="_blank" class="btn btn-outline">
                 <span class="material-icons-outlined">map</span> Ver ubicación
             </a>
         </div>
@@ -228,15 +242,15 @@
                 </div>
                 <div class="event-detail">
                     <span class="material-icons-outlined">schedule</span>
-                    <p>6:00 PM</p>
+                    <p>1:00 PM</p>
                 </div>
                 <div class="event-detail">
                     <span class="material-icons-outlined">place</span>
-                    <p>Hacienda Los Olivos</p>
-                    <p class="sub-detail">Av. Las Palmas 456, Afueras</p>
+                    <p>Condominio Lomas de Carabayllo</p>
+                    <p class="sub-detail">Av Universitaria Cdra 15, Club House</p>
                 </div>
             </div>
-            <a href="#" target="_blank" class="btn btn-outline">
+            <a href="https://maps.app.goo.gl/itmpKjtSQ4PJQYcu7" target="_blank" class="btn btn-outline">
                 <span class="material-icons-outlined">map</span> Ver ubicación
             </a>
         </div>
@@ -274,7 +288,7 @@
                         </div>
                         <p class="passes-note">Pases Personales</p>
                     </div>
-                    <div class="pass-card">
+                    <div class="pass-card" id="table-card">
                         <div class="passes-badge table-badge">
                             <span class="passes-number" id="guest-table">-</span>
                         </div>
@@ -310,47 +324,41 @@
                 <div class="dresscode-card">
                     <img src="assets/images/dress_miniature.png" alt="Vestido formal femenino" class="framed-img">
                     <h4>Damas</h4>
-                    <p>Vestido elegante y modesto.</p>
+                    <p>Vestido elegante (largo o medio).</p>
                 </div>
             </div>
 
             <div class="dresscode-rules">
                 <h4>Por favor, considerar:</h4>
                 <ul>
-                    <li><span class="rule-no">✕</span> No vestidos blancos, crema, rojos ni derivados.</li>
-                    <li><span class="rule-no">✕</span> No verde olivo ni derivados.</li>
-                    <li><span class="rule-yes">✓</span> Sí traje y vestido.</li>
+                    <li><span class="rule-no">✕</span> No llevar blanco, crema, rojo ni derivados.</li>
+                    <li><span class="rule-no">✕</span> No llevar verde olivo ni derivados.</li>
+                    <li><span class="rule-yes">✓</span> Traje formal y vestido modesto</li>
                 </ul>
             </div>
         </div>
     </section>
 
 
-
     <!-- ============================================
-         CANCIÓN: Ahora ya somos uno
+         CANCIÓN: Conmigo siempre
          ============================================ -->
     <section id="our-song" class="our-song-section">
         <div class="container fade-in">
             <h2 class="section-title script-font">Nuestra Canción</h2>
-            <p class="section-text">"Ahora ya somos uno" — Cantemos con gozo a Jehová, canción 132</p>
+            <p class="section-text">"Conmigo siempre" — Divino</p>
             <div class="song-player-card">
                 <div class="song-art">
                     <span class="material-icons-outlined">library_music</span>
                 </div>
                 <div class="song-info">
-                    <p class="song-title">Ahora ya somos uno</p>
-                    <p class="song-artist">Cantemos con gozo a Jehová · Canción 132</p>
+                    <p class="song-title">Conmigo siempre</p>
+                    <p class="song-artist">Divino</p>
                 </div>
                 <button id="song-play-btn" class="song-play-btn" title="Reproducir">
                     <span class="material-icons-outlined" id="song-play-icon">play_arrow</span>
                 </button>
             </div>
-            <p class="song-source">
-                <a href="https://www.jw.org/es/biblioteca/musica-canciones/cantemos-con-gozo/132-ahora-ya-somos-uno/" target="_blank" rel="noopener">
-                    Escuchar en jw.org <span class="material-icons-outlined link-icon">open_in_new</span>
-                </a>
-            </p>
         </div>
     </section>
 
@@ -364,9 +372,14 @@
                 Nos encantaría contar contigo. Por favor confirma tu asistencia antes del
                 <strong>15 de Mayo de 2026</strong>.
             </p>
-            <a href="https://wa.me/1234567890?text=Hola!%20Confirmo%20mi%20asistencia%20a%20la%20boda%20de%20Diego%20y%20Allison." target="_blank" class="btn btn-rsvp">
-                <span class="material-icons-outlined">favorite</span> Confirmar Asistencia
-            </a>
+            <div class="rsvp-buttons" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+                 <a href="https://wa.me/51959942625?text=Hola,%20confirmo%20mi%20asistencia%20a%20la%20boda,%20ser%C3%A1%20un%20d%C3%ADa%20especial%20%F0%9F%8E%89%F0%9F%92%9A" target="_blank" class="btn btn-rsvp">
+                    <span class="material-icons-outlined">favorite_border</span> Confirmar asistencia con el Novio
+                </a>
+                <a href="https://wa.me/51933252815?text=Hola,%20confirmo%20mi%20asistencia%20a%20la%20boda%20con%20mucha%20alegr%C3%ADa%20%F0%9F%92%8D%E2%9C%A8" target="_blank" class="btn btn-rsvp">
+                    <span class="material-icons-outlined">favorite_border</span> Confirmar asistencia con la Novia
+                </a>
+            </div>
         </div>
     </section>
 

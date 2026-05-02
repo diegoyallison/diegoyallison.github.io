@@ -44,7 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // ======================================================
     // 3. AUDIO — Keep Hero, FAB, and Song Card in sync
     // ======================================================
-    const bgAudio = document.getElementById('bg-audio');
+    const heroAudio = document.getElementById('hero-audio');
+    const ourSongAudio = document.getElementById('our-song-audio');
+    
     const fab = document.getElementById('audio-player');
     const fabIcon = document.getElementById('audio-icon');
     const heroBtn = document.getElementById('hero-play-btn');
@@ -52,41 +54,61 @@ document.addEventListener('DOMContentLoaded', () => {
     const songBtn = document.getElementById('song-play-btn');
     const songIcon = document.getElementById('song-play-icon');
 
-    let isPlaying = false;
+    let isHeroPlaying = false;
+    let isOurSongPlaying = false;
 
-    function syncUI(playing) {
-        isPlaying = playing;
+    function syncHeroUI(playing) {
+        isHeroPlaying = playing;
         const icon = playing ? 'pause' : 'play_arrow';
-
-        // FAB
-        fabIcon.textContent = icon;
-        fab.classList.toggle('playing', playing);
-
-        // Hero button
+        
+        if (fabIcon) fabIcon.textContent = icon;
+        if (fab) fab.classList.toggle('playing', playing);
+        
         if (heroIcon) heroIcon.textContent = icon;
         if (heroBtn) heroBtn.classList.toggle('playing', playing);
-
-        // Song card button
-        if (songIcon) songIcon.textContent = icon;
     }
 
-    function toggleAudio() {
-        if (isPlaying) {
-            bgAudio.pause();
-            syncUI(false);
+    function syncOurSongUI(playing) {
+        isOurSongPlaying = playing;
+        const icon = playing ? 'pause' : 'play_arrow';
+        if (songIcon) songIcon.textContent = icon;
+        if (songBtn) songBtn.classList.toggle('playing', playing);
+    }
+
+    function toggleHeroAudio() {
+        if (isHeroPlaying) {
+            heroAudio.pause();
+            syncHeroUI(false);
         } else {
-            bgAudio.play().catch(() => { /* autoplay blocked */ });
-            syncUI(true);
+            if (isOurSongPlaying) {
+                ourSongAudio.pause();
+                syncOurSongUI(false);
+            }
+            heroAudio.play().catch(() => { /* autoplay blocked */ });
+            syncHeroUI(true);
         }
     }
 
-    // Wire up all three buttons
-    fab.addEventListener('click', toggleAudio);
-    if (heroBtn) heroBtn.addEventListener('click', toggleAudio);
-    if (songBtn) songBtn.addEventListener('click', toggleAudio);
+    function toggleOurSongAudio() {
+        if (isOurSongPlaying) {
+            ourSongAudio.pause();
+            syncOurSongUI(false);
+        } else {
+            if (isHeroPlaying) {
+                heroAudio.pause();
+                syncHeroUI(false);
+            }
+            ourSongAudio.play().catch(() => { /* autoplay blocked */ });
+            syncOurSongUI(true);
+        }
+    }
 
-    // When audio ends naturally
-    bgAudio.addEventListener('ended', () => syncUI(false));
+    if (fab) fab.addEventListener('click', toggleHeroAudio);
+    if (heroBtn) heroBtn.addEventListener('click', toggleHeroAudio);
+    if (songBtn) songBtn.addEventListener('click', toggleOurSongAudio);
+
+    if (heroAudio) heroAudio.addEventListener('ended', () => syncHeroUI(false));
+    if (ourSongAudio) ourSongAudio.addEventListener('ended', () => syncOurSongUI(false));
 
     // ======================================================
     // 4. GOOGLE SHEETS INTEGRATION (Dynamic Passes)
@@ -123,7 +145,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     passesContent.style.display = 'block';
                     document.getElementById('guest-names').textContent = guestData[1] || 'Invitados Especiales';
                     document.getElementById('guest-count').textContent = guestData[2] || '1';
-                    document.getElementById('guest-table').textContent = guestData[3] || '-';
+                    
+                    const tableNum = guestData[3] || '0';
+                    const tableCard = document.getElementById('table-card');
+                    if (tableNum === '0' || tableNum === 0) {
+                        if (tableCard) tableCard.style.display = 'none';
+                    } else {
+                        if (tableCard) tableCard.style.display = 'block';
+                        document.getElementById('guest-table').textContent = tableNum;
+                    }
                 } else {
                     passesError.style.display = 'block';
                 }

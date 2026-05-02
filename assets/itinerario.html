@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Itinerario — Diego & Allison</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-variant-numeric: normal; font-feature-settings: 'onum' 0, 'lnum' 1; }
+
+    body {
+      width: 297mm;
+      height: 210mm;
+      background: #f5f0eb;
+      font-family: 'Playfair Display', Georgia, serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ── Fondo textura papel ── */
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(180,200,160,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 50%, rgba(180,200,160,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* ── Ramas decorativas (SVG inline via pseudo) ── */
+    .branch-left, .branch-right {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 140px;
+      display: flex;
+      align-items: center;
+    }
+    .branch-left  { left: 0; }
+    .branch-right { right: 0; transform: scaleX(-1); }
+
+    .branch-left svg, .branch-right svg {
+      width: 140px;
+      height: auto;
+      opacity: 0.55;
+    }
+
+    /* ── Contenido principal ── */
+    .page {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 155px 10px;
+      z-index: 1;
+    }
+
+    /* Bloque de cabecera compacto */
+    .header-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    /* ── Anillos ── */
+    .rings {
+      font-size: 20px;
+      color: #7a7a7a;
+      line-height: 1;
+      margin-bottom: 0;
+      letter-spacing: -2px;
+    }
+
+    /* ── Títulos ── */
+    .title-block { text-align: center; line-height: 0.9; margin-bottom: 3px; }
+    .title-main {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 38px;
+      font-weight: 700;
+      color: #2c2c2c;
+      letter-spacing: 2px;
+      display: block;
+      font-variant-numeric: normal;
+    }
+    .title-sub {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: #2c2c2c;
+      letter-spacing: 2px;
+      display: block;
+      font-variant-numeric: normal;
+    }
+
+    /* Decoradores de estrellas */
+    .star-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin: 3px 0;
+      color: #5a5a5a;
+      font-size: 12px;
+    }
+    .star { display: inline-block; }
+    .star::before { content: '✦'; }
+    .star-sm::before { content: '✦'; font-size: 8px; }
+
+    /* ── Nombres ── */
+    .couple-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: 32px;
+      color: #3a3a3a;
+      text-align: center;
+      line-height: 1.0;
+      margin-bottom: 0;
+    }
+
+    /* ── Fecha ── */
+    .date-info {
+      font-family: 'Lato', Arial, sans-serif;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 3px;
+      color: #5a5a5a;
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      font-variant-numeric: normal;
+    }
+
+    /* ── Separador fino ── */
+    .divider {
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #b0a090, transparent);
+      margin-bottom: 6px;
+    }
+
+    /* ── Línea de tiempo ── */
+    .timeline-wrapper {
+      width: 100%;
+      position: relative;
+      height: 130px;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    /* Línea horizontal — a mitad del wrapper = 65px */
+    .timeline-line {
+      position: absolute;
+      top: 55px;
+      left: 0;
+      right: 0;
+      height: 1.5px;
+      background: #3a3a3a;
+    }
+    .timeline-line::before, .timeline-line::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #3a3a3a;
+    }
+    .timeline-line::before { left: 0; }
+    .timeline-line::after  { right: 0; }
+
+    /* Contenedor de items */
+    .timeline-items {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .tl-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      position: relative;
+    }
+
+    /* Dot en la línea — centrado en la línea (top:55px) */
+    .tl-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #f5f0eb;
+      border: 2px solid #3a3a3a;
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+
+    /* Hora — encima de la línea */
+    .tl-time {
+      font-family: 'Lato', Arial, sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      color: #3a3a3a;
+      letter-spacing: 0.5px;
+      position: absolute;
+      top: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-variant-numeric: normal;
+    }
+
+    /* Icono — debajo de la línea */
+    .tl-icon {
+      font-size: 18px;
+      position: absolute;
+      top: 66px;
+      left: 50%;
+      transform: translateX(-50%);
+      line-height: 1;
+    }
+
+    /* Etiqueta — debajo del icono */
+    .tl-label {
+      position: absolute;
+      top: 88px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      width: 80px;
+    }
+    .tl-label strong {
+      display: block;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 9px;
+      font-weight: 600;
+      color: #2c2c2c;
+      white-space: nowrap;
+      font-variant-numeric: normal;
+    }
+    .tl-label span {
+      display: block;
+      font-family: 'Lato', Arial, sans-serif;
+      font-size: 7px;
+      font-weight: 300;
+      color: #666;
+      line-height: 1.3;
+      margin-top: 1px;
+      font-variant-numeric: normal;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Ramas decorativas izquierda -->
+<div class="branch-left">
+  <svg viewBox="0 0 140 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M70 400 Q60 300 40 200 Q20 100 50 20" stroke="#8aab70" stroke-width="2.5" fill="none"/>
+    <!-- Hojas grandes -->
+    <ellipse cx="38" cy="80" rx="22" ry="10" fill="#9ebb80" transform="rotate(-40 38 80)"/>
+    <ellipse cx="28" cy="140" rx="26" ry="11" fill="#8aab70" transform="rotate(-55 28 140)"/>
+    <ellipse cx="50" cy="60" rx="18" ry="8" fill="#b5cc95" transform="rotate(30 50 60)"/>
+    <ellipse cx="35" cy="190" rx="24" ry="10" fill="#9ebb80" transform="rotate(-45 35 190)"/>
+    <ellipse cx="55" cy="220" rx="20" ry="9" fill="#8aab70" transform="rotate(25 55 220)"/>
+    <ellipse cx="28" cy="260" rx="22" ry="9" fill="#b5cc95" transform="rotate(-50 28 260)"/>
+    <ellipse cx="48" cy="300" rx="26" ry="11" fill="#9ebb80" transform="rotate(-35 48 300)"/>
+    <ellipse cx="30" cy="340" rx="20" ry="8" fill="#8aab70" transform="rotate(40 30 340)"/>
+    <!-- Frutos/olivos -->
+    <ellipse cx="42" cy="100" rx="5" ry="7" fill="#6a8c58"/>
+    <ellipse cx="25" cy="165" rx="5" ry="7" fill="#7a9c68"/>
+    <ellipse cx="52" cy="240" rx="4" ry="6" fill="#6a8c58"/>
+    <ellipse cx="32" cy="285" rx="5" ry="7" fill="#7a9c68"/>
+    <ellipse cx="45" cy="320" rx="4" ry="6" fill="#6a8c58"/>
+  </svg>
+</div>
+
+<!-- Ramas decorativas derecha (espejada) -->
+<div class="branch-right">
+  <svg viewBox="0 0 140 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M70 400 Q60 300 40 200 Q20 100 50 20" stroke="#8aab70" stroke-width="2.5" fill="none"/>
+    <ellipse cx="38" cy="80" rx="22" ry="10" fill="#9ebb80" transform="rotate(-40 38 80)"/>
+    <ellipse cx="28" cy="140" rx="26" ry="11" fill="#8aab70" transform="rotate(-55 28 140)"/>
+    <ellipse cx="50" cy="60" rx="18" ry="8" fill="#b5cc95" transform="rotate(30 50 60)"/>
+    <ellipse cx="35" cy="190" rx="24" ry="10" fill="#9ebb80" transform="rotate(-45 35 190)"/>
+    <ellipse cx="55" cy="220" rx="20" ry="9" fill="#8aab70" transform="rotate(25 55 220)"/>
+    <ellipse cx="28" cy="260" rx="22" ry="9" fill="#b5cc95" transform="rotate(-50 28 260)"/>
+    <ellipse cx="48" cy="300" rx="26" ry="11" fill="#9ebb80" transform="rotate(-35 48 300)"/>
+    <ellipse cx="30" cy="340" rx="20" ry="8" fill="#8aab70" transform="rotate(40 30 340)"/>
+    <ellipse cx="42" cy="100" rx="5" ry="7" fill="#6a8c58"/>
+    <ellipse cx="25" cy="165" rx="5" ry="7" fill="#7a9c68"/>
+    <ellipse cx="52" cy="240" rx="4" ry="6" fill="#6a8c58"/>
+    <ellipse cx="32" cy="285" rx="5" ry="7" fill="#7a9c68"/>
+    <ellipse cx="45" cy="320" rx="4" ry="6" fill="#6a8c58"/>
+  </svg>
+</div>
+
+<!-- Contenido -->
+<div class="page">
+
+  <!-- Icono anillos -->
+  <div class="rings">◎◎</div>
+
+  <!-- Título -->
+  <div class="title-block">
+    <span class="title-sub">Itinerario</span>
+  </div>
+
+  <!-- Estrellas decorativas -->
+  <div class="star-row">
+    <span class="star-sm star"></span>
+    <span class="star"></span>
+    <span class="couple-name">Diego &amp; Allison</span>
+    <span class="star"></span>
+    <span class="star-sm star"></span>
+  </div>
+
+  <!-- Fecha -->
+  <div class="date-info">13 · 06 · 2026 &nbsp;·&nbsp; Lima, Perú</div>
+
+  <!-- Separador -->
+  <div class="divider"></div>
+
+  <!-- Línea de tiempo -->
+  <div class="timeline-wrapper">
+    <div class="timeline-line"></div>
+    <div class="timeline-items" style="height:120px;">
+
+      <!-- 1 Ceremonia -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-time">11:00 AM</div>
+        <div class="tl-icon">💍</div>
+        <div class="tl-label">
+          <strong>Ceremonia</strong>
+          <span>Religiosa</span>
+        </div>
+      </div>
+
+      <!-- 2 Recepción -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-time">1:00 PM</div>
+        <div class="tl-icon">🍽️</div>
+        <div class="tl-label">
+          <strong>Recepción</strong>
+          <span>Ingreso & buffet de entrada</span>
+        </div>
+      </div>
+
+      <!-- 3 Gran Entrada -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-time">2:00 PM</div>
+        <div class="tl-icon">📸</div>
+        <div class="tl-label">
+          <strong>Gran Entrada</strong>
+          <span>Llegada de los esposos & fotos</span>
+        </div>
+      </div>
+
+      <!-- 4 Bailes -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-time">3:00 PM</div>
+        <div class="tl-icon">💃</div>
+        <div class="tl-label">
+          <strong>Bailes</strong>
+          <span>Primer baile & bailes familiares</span>
+        </div>
+      </div>
+
+      <!-- 5 Palabras -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-time">3:45 PM</div>
+        <div class="tl-icon">🎤</div>
+        <div class="tl-label">
+          <strong>Palabras</strong>
+          <span>Mensajes de familias</span>
+        </div>
+      </div>
+
+      <!-- 6 Banquete -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-time">4:30 PM</div>
+        <div class="tl-icon">🥂</div>
+        <div class="tl-label">
+          <strong>Banquete</strong>
+          <span>Cena & brindis</span>
+        </div>
+      </div>
+
+      <!-- 7 Sorpresas -->
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-time">6:00 PM</div>
+        <div class="tl-icon">🎉</div>
+        <div class="tl-label">
+          <strong>Sorpresas</strong>
+          <span>Momentos especiales & bailetón</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
