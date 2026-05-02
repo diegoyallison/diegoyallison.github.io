@@ -225,6 +225,56 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetIndex = dots.findIndex(dot => dot === targetDot);
             moveToSlide(targetIndex);
         });
+
+        // SWIPE & DRAG SUPPORT
+        let startX = 0;
+        let isDragging = false;
+
+        const handleSwipeStart = (x) => {
+            startX = x;
+            isDragging = true;
+        };
+
+        const handleSwipeEnd = (x) => {
+            if (!isDragging) return;
+            const diff = startX - x;
+            const threshold = 50; // pixels
+
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    // Swipe Left -> Next
+                    let nextIndex = currentIndex + 1;
+                    if (nextIndex >= slides.length) nextIndex = 0;
+                    moveToSlide(nextIndex);
+                } else {
+                    // Swipe Right -> Prev
+                    let prevIndex = currentIndex - 1;
+                    if (prevIndex < 0) prevIndex = slides.length - 1;
+                    moveToSlide(prevIndex);
+                }
+            }
+            isDragging = false;
+        };
+
+        // Touch events
+        track.addEventListener('touchstart', (e) => handleSwipeStart(e.touches[0].clientX), { passive: true });
+        track.addEventListener('touchend', (e) => handleSwipeEnd(e.changedTouches[0].clientX), { passive: true });
+
+        // Mouse events
+        track.addEventListener('mousedown', (e) => {
+            handleSwipeStart(e.clientX);
+            track.style.cursor = 'grabbing';
+        });
+        
+        window.addEventListener('mouseup', (e) => {
+            if (isDragging) {
+                handleSwipeEnd(e.clientX);
+                track.style.cursor = 'grab';
+            }
+        });
+
+        // Prevent image dragging from interfering
+        track.addEventListener('dragstart', (e) => e.preventDefault());
     }
 
 });

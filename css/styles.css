@@ -532,6 +532,19 @@ picture {
     width: 100%;
     max-width: 100%;
     flex-shrink: 0;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+.carousel-track:active {
+    cursor: grabbing;
+}
+
+.carousel-track img {
+    -webkit-user-drag: none;
+    user-select: none;
+    pointer-events: none; /* Ensure images don't block swipe events */
 }
 
 .carousel-slide {
