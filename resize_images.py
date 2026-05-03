@@ -19,16 +19,16 @@ def create_responsive_images(source_path, base_dir):
     for device, (width, height) in sizes.items():
         out_dir = os.path.join(base_dir, device)
         os.makedirs(out_dir, exist_ok=True)
-        out_path = os.path.join(out_dir, 'foto-37.jpg')
+        out_path = os.path.join(out_dir, 'foto-23.jpg')
         
         # Resize and crop to fill the target size
-        resized_img = ImageOps.fit(img, (width, height), method=Image.LANCZOS, centering=(0.5, 0.3))
+        resized_img = ImageOps.fit(img, (width, height), method=Image.LANCZOS, centering=(0.5, 0.5))
         
         # Save with high quality
         resized_img.save(out_path, 'JPEG', quality=90)
         print(f"Created {device} version at {out_path}")
 
 if __name__ == "__main__":
-    source = 'assets/images/foto-37.jpg'
+    source = 'assets/images/foto-23.jpg'
     base = 'assets/images'
     create_responsive_images(source, base)
