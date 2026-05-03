@@ -154,6 +154,19 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (tableCard) tableCard.style.display = 'block';
                         document.getElementById('guest-table').textContent = tableNum;
                     }
+
+                    // Check confirmation status (Column 5 / index 4)
+                    const confirmStatus = (guestData[4] || '').toUpperCase();
+                    const rsvpButtons = document.getElementById('rsvp-buttons');
+                    const rsvpConfirmed = document.getElementById('rsvp-confirmed');
+                    
+                    if (confirmStatus === 'SI' || confirmStatus === 'SÍ' || confirmStatus === 'S' || confirmStatus === 'CONFIRMADO') {
+                        if (rsvpButtons) rsvpButtons.style.display = 'none';
+                        if (rsvpConfirmed) rsvpConfirmed.style.display = 'block';
+                    } else {
+                        if (rsvpButtons) rsvpButtons.style.display = 'flex';
+                        if (rsvpConfirmed) rsvpConfirmed.style.display = 'none';
+                    }
                 } else {
                     passesError.style.display = 'block';
                 }

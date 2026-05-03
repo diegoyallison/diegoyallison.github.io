@@ -331,7 +331,7 @@
             <div class="dresscode-rules">
                 <h4>Por favor, considerar:</h4>
                 <ul>
-                    <li><span class="rule-no">✕</span> No llevar blanco, crema, rojo ni derivados.</li>
+                    <li><span class="rule-no">✕</span> No llevar blanco, crema ni derivados.</li>
                     <li><span class="rule-no">✕</span> No llevar verde olivo ni derivados.</li>
                     <li><span class="rule-yes">✓</span> Traje formal y vestido modesto</li>
                 </ul>
@@ -372,13 +372,20 @@
                 Nos encantaría contar contigo. Por favor confirma tu asistencia antes del
                 <strong>15 de Mayo de 2026</strong>.
             </p>
-            <div class="rsvp-buttons" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+            <div id="rsvp-buttons" class="rsvp-buttons" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
                  <a href="https://wa.me/51959942625?text=Hola,%20confirmo%20mi%20asistencia%20a%20la%20boda,%20ser%C3%A1%20un%20d%C3%ADa%20especial%20%F0%9F%8E%89%F0%9F%92%9A" target="_blank" class="btn btn-rsvp">
                     <span class="rsvp-emoji">🤵‍♂️</span> Confirmar con el Novio
                 </a>
                 <a href="https://wa.me/51933252815?text=Hola,%20confirmo%20mi%20asistencia%20a%20la%20boda%20con%20mucha%20alegr%C3%ADa%20%F0%9F%92%8D%E2%9C%A8" target="_blank" class="btn btn-rsvp">
                     <span class="rsvp-emoji">👰‍♀️</span> Confirmar con la Novia
                 </a>
+            </div>
+            
+            <div id="rsvp-confirmed" style="display: none; text-align: center; margin-top: 20px;">
+                <p class="section-text" style="color: var(--gold); font-weight: 600; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <span class="material-icons-outlined" style="font-size: 2rem;">check_circle</span> 
+                    ¡Ya confirmó su asistencia!
+                </p>
             </div>
         </div>
     </section>
