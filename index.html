@@ -152,7 +152,6 @@
                 
                 <div class="carousel-viewport">
                     <div class="carousel-track" id="gallery-track">
-                        <!-- Las fotos reales de preboda se colocarán aquí -->
                         <div class="carousel-slide current">
                             <picture>
                                 <source media="(min-width: 1024px)" srcset="assets/images/laptop/foto-31.jpg">
@@ -228,83 +227,144 @@
         </div>
     </section>
 
-    <!-- ============================================
-         RECEPCIÓN
-         ============================================ -->
-    <section id="reception" class="event-section">
+    <!-- Contenedor para el mensaje de acceso restringido -->
+    <section id="access-denied" class="access-denied-section" style="display: none; padding: 4rem 0; text-align: center;">
         <div class="container fade-in">
-            <span class="material-icons-outlined event-icon">celebration</span>
-            <h2 class="section-title script-font">Recepción</h2>
-            <div class="event-details-block">
-                <div class="event-detail">
-                    <span class="material-icons-outlined">calendar_today</span>
-                    <p>Sábado, 13 de Junio de 2026</p>
+            <span class="material-icons-outlined" style="font-size: 3rem; color: var(--gold); margin-bottom: 1rem;">lock</span>
+            <h2 class="section-title script-font">Acceso Reservado</h2>
+            <p class="section-text" style="font-size: 1.2rem;">La invitación está reservada solo para los invitados.</p>
+        </div>
+    </section>
+
+    <!-- Contenedor principal de la invitación (se mostrará solo a invitados válidos) -->
+    <div id="invitation-content" style="display: none;">
+        <!-- ============================================
+             RECEPCIÓN
+             ============================================ -->
+        <section id="reception" class="event-section">
+            <div class="container fade-in">
+                <span class="material-icons-outlined event-icon">celebration</span>
+                <h2 class="section-title script-font">Recepción</h2>
+                <div class="event-details-block">
+                    <div class="event-detail">
+                        <span class="material-icons-outlined">calendar_today</span>
+                        <p>Sábado, 13 de Junio de 2026</p>
+                    </div>
+                    <div class="event-detail">
+                        <span class="material-icons-outlined">schedule</span>
+                        <p>1:00 PM</p>
+                    </div>
+                    <div class="event-detail">
+                        <span class="material-icons-outlined">place</span>
+                        <p>Condominio Lomas de Carabayllo</p>
+                        <p class="sub-detail">Av Universitaria Cdra 15, Club House</p>
+                    </div>
                 </div>
-                <div class="event-detail">
-                    <span class="material-icons-outlined">schedule</span>
-                    <p>1:00 PM</p>
-                </div>
-                <div class="event-detail">
-                    <span class="material-icons-outlined">place</span>
-                    <p>Condominio Lomas de Carabayllo</p>
-                    <p class="sub-detail">Av Universitaria Cdra 15, Club House</p>
-                </div>
+                <a href="https://maps.app.goo.gl/itmpKjtSQ4PJQYcu7" target="_blank" class="btn btn-outline">
+                    <span class="material-icons-outlined">map</span> Ver ubicación
+                </a>
             </div>
-            <a href="https://maps.app.goo.gl/itmpKjtSQ4PJQYcu7" target="_blank" class="btn btn-outline">
-                <span class="material-icons-outlined">map</span> Ver ubicación
-            </a>
-        </div>
-    </section>
+        </section>
 
-    <!-- ============================================
-         ITINERARIO (Download Button)
-         ============================================ -->
-    <section id="itinerary" class="itinerary-section">
-        <div class="container fade-in">
-            <span class="material-icons-outlined event-icon">description</span>
-            <h2 class="section-title script-font">Itinerario</h2>
-            <p class="section-text">Consulta el itinerario completo de nuestra celebración.</p>
-            <a href="assets/itinerario.html" class="btn btn-outline">
-                <span class="material-icons-outlined">timeline</span> Ver Itinerario
-            </a>
-        </div>
-    </section>
+        <!-- ============================================
+             ITINERARIO
+             ============================================ -->
+        <section id="itinerary" class="itinerary-section">
+            <div class="container fade-in">
+                <span class="material-icons-outlined event-icon">description</span>
+                <h2 class="section-title script-font">Itinerario</h2>
+                <p class="section-text">Consulta el itinerario completo de nuestra celebración.</p>
+                <a href="assets/itinerario.html" class="btn btn-outline">
+                    <span class="material-icons-outlined">timeline</span> Ver Itinerario
+                </a>
+            </div>
+        </section>
 
-    <!-- ============================================
-         PASES (Cargados dinámicamente)
-         ============================================ -->
-    <section id="passes" class="passes-section">
-        <div class="container fade-in">
-            <h2 class="section-title script-font">Pases</h2>
-            
-            <div id="passes-content" style="display: none;">
-                <p class="section-text guest-names-text" id="guest-names">Nuestros Invitados</p>
-                <p class="section-text">Hemos reservado para ustedes:</p>
+        <!-- ============================================
+             PASES
+             ============================================ -->
+        <section id="passes" class="passes-section">
+            <div class="container fade-in">
+                <h2 class="section-title script-font">Pases</h2>
                 
-                <div class="passes-grid">
-                    <div class="pass-card">
-                        <div class="passes-badge">
-                            <span class="passes-number" id="guest-count">1</span>
+                <div id="passes-content" style="display: none;">
+                    <p class="section-text guest-names-text" id="guest-names">Nuestros Invitados</p>
+                    <p class="section-text">Hemos reservado para ustedes:</p>
+                    
+                    <div class="passes-grid">
+                        <div class="pass-card">
+                            <div class="passes-badge">
+                                <span class="passes-number" id="guest-count">1</span>
+                            </div>
+                            <p class="passes-note">Pases Personales</p>
                         </div>
-                        <p class="passes-note">Pases Personales</p>
-                    </div>
-                    <div class="pass-card" id="table-card">
-                        <div class="passes-badge table-badge">
-                            <span class="passes-number" id="guest-table">-</span>
+                        <div class="pass-card" id="table-card">
+                            <div class="passes-badge table-badge">
+                                <span class="passes-number" id="guest-table">-</span>
+                            </div>
+                            <p class="passes-note">Mesa</p>
                         </div>
-                        <p class="passes-note">Mesa</p>
                     </div>
                 </div>
+                
+                <div id="passes-loading" class="passes-status-msg">Cargando información de tu invitación...</div>
+                <div id="passes-error" class="passes-status-msg" style="display: none;">No se pudo encontrar tu invitación. Por favor, verifica el enlace.</div>
+                <div id="passes-empty" class="passes-status-msg" style="display: none;">
+                    <p class="section-text">Esta invitación es válida para los destinatarios especificados.</p>
+                </div>
             </div>
-            
-            <!-- Loading and Error States -->
-            <div id="passes-loading" class="passes-status-msg">Cargando información de tu invitación...</div>
-            <div id="passes-error" class="passes-status-msg" style="display: none;">No se pudo encontrar tu invitación. Por favor, verifica el enlace.</div>
-            <div id="passes-empty" class="passes-status-msg" style="display: none;">
-                <p class="section-text">Esta invitación es válida para los destinatarios especificados.</p>
+        </section>
+
+        <!-- ============================================
+             NUESTRA CANCIÓN
+             ============================================ -->
+        <section id="our-song" class="our-song-section">
+            <div class="container fade-in">
+                <h2 class="section-title script-font">Nuestra Canción</h2>
+                <p class="section-text">"Conmigo siempre" — Divino</p>
+                <div class="song-player-card">
+                    <div class="song-art">
+                        <span class="material-icons-outlined">library_music</span>
+                    </div>
+                    <div class="song-info">
+                        <p class="song-title">Conmigo siempre</p>
+                        <p class="song-artist">Divino</p>
+                    </div>
+                    <button id="song-play-btn" class="song-play-btn" title="Reproducir">
+                        <span class="material-icons-outlined" id="song-play-icon">play_arrow</span>
+                    </button>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- ============================================
+             RSVP
+             ============================================ -->
+        <section id="rsvp" class="rsvp-section">
+            <div class="container fade-in">
+                <h2 class="section-title script-font rsvp-title">Confirmar Asistencia</h2>
+                <p class="section-text rsvp-text">
+                    Nos encantaría contar contigo. Por favor confirma tu asistencia antes del
+                    <strong>15 de Mayo de 2026</strong>.
+                </p>
+                <div id="rsvp-buttons" class="rsvp-buttons" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+                     <a href="https://wa.me/51959942625?text=Hola,%20confirmo%20mi%20asistencia%20a%20la%20boda,%20ser%C3%A1%20un%20d%C3%ADa%20especial%20%F0%9F%8E%89%F0%9F%92%9A" target="_blank" class="btn btn-rsvp">
+                        <span class="rsvp-emoji">🤵‍♂️</span> Confirmar con el Novio
+                    </a>
+                    <a href="https://wa.me/51933252815?text=Hola,%20confirmo%20mi%20asistencia%20a%20la%20boda%20con%20mucha%20alegr%C3%ADa%20%F0%9F%92%8D%E2%9C%A8" target="_blank" class="btn btn-rsvp">
+                        <span class="rsvp-emoji">👰‍♀️</span> Confirmar con la Novia
+                    </a>
+                </div>
+                
+                <div id="rsvp-confirmed" style="display: none; text-align: center; margin-top: 20px;">
+                    <p class="section-text" style="color: var(--gold); font-weight: 600; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                        <span class="material-icons-outlined" style="font-size: 2rem;">check_circle</span> 
+                        ¡Ya confirmó su asistencia!
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div> <!-- Fin de #invitation-content -->
 
     <!-- ============================================
          CÓDIGO DE VESTIMENTA
@@ -339,64 +399,17 @@
         </div>
     </section>
 
-
-    <!-- ============================================
-         CANCIÓN: Conmigo siempre
-         ============================================ -->
-    <section id="our-song" class="our-song-section">
-        <div class="container fade-in">
-            <h2 class="section-title script-font">Nuestra Canción</h2>
-            <p class="section-text">"Conmigo siempre" — Divino</p>
-            <div class="song-player-card">
-                <div class="song-art">
-                    <span class="material-icons-outlined">library_music</span>
-                </div>
-                <div class="song-info">
-                    <p class="song-title">Conmigo siempre</p>
-                    <p class="song-artist">Divino</p>
-                </div>
-                <button id="song-play-btn" class="song-play-btn" title="Reproducir">
-                    <span class="material-icons-outlined" id="song-play-icon">play_arrow</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================
-         CONFIRMAR ASISTENCIA (RSVP)
-         ============================================ -->
-    <section id="rsvp" class="rsvp-section">
-        <div class="container fade-in">
-            <h2 class="section-title script-font rsvp-title">Confirmar Asistencia</h2>
-            <p class="section-text rsvp-text">
-                Nos encantaría contar contigo. Por favor confirma tu asistencia antes del
-                <strong>15 de Mayo de 2026</strong>.
-            </p>
-            <div id="rsvp-buttons" class="rsvp-buttons" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
-                 <a href="https://wa.me/51959942625?text=Hola,%20confirmo%20mi%20asistencia%20a%20la%20boda,%20ser%C3%A1%20un%20d%C3%ADa%20especial%20%F0%9F%8E%89%F0%9F%92%9A" target="_blank" class="btn btn-rsvp">
-                    <span class="rsvp-emoji">🤵‍♂️</span> Confirmar con el Novio
-                </a>
-                <a href="https://wa.me/51933252815?text=Hola,%20confirmo%20mi%20asistencia%20a%20la%20boda%20con%20mucha%20alegr%C3%ADa%20%F0%9F%92%8D%E2%9C%A8" target="_blank" class="btn btn-rsvp">
-                    <span class="rsvp-emoji">👰‍♀️</span> Confirmar con la Novia
-                </a>
-            </div>
-            
-            <div id="rsvp-confirmed" style="display: none; text-align: center; margin-top: 20px;">
-                <p class="section-text" style="color: var(--gold); font-weight: 600; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                    <span class="material-icons-outlined" style="font-size: 2rem;">check_circle</span> 
-                    ¡Ya confirmó su asistencia!
-                </p>
-            </div>
-        </div>
-    </section>
-
     <!-- ============================================
          FOOTER
          ============================================ -->
     <footer class="site-footer">
         <!-- Pre-wedding photo background -->
         <div class="footer-bg">
-            <img src="assets/images/hero_prewedding.png" alt="Preboda en Ancón" class="footer-bg-img">
+            <picture>
+                <source media="(min-width: 1024px)" srcset="assets/images/laptop/foto-43.jpg?v=1.2">
+                <source media="(min-width: 768px)" srcset="assets/images/tablet/foto-43.jpg?v=1.2">
+                <img src="assets/images/mobile/foto-43.jpg?v=1.2" alt="Diego y Allison" class="footer-bg-img">
+            </picture>
             <div class="footer-bg-overlay"></div>
         </div>
         <div class="footer-content">

@@ -124,27 +124,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const invitadoId = getQueryParam('invitado');
+    const invitationContent = document.getElementById('invitation-content');
+    const accessDenied = document.getElementById('access-denied');
     const passesContent = document.getElementById('passes-content');
     const passesLoading = document.getElementById('passes-loading');
     const passesError = document.getElementById('passes-error');
     const passesEmpty = document.getElementById('passes-empty');
 
     if (invitadoId) {
-        // Fetch real al CSV
         fetch(SHEET_CSV_URL)
             .then(response => response.text())
             .then(csvText => {
-                // Parseo manual sencillo de CSV separando por saltos de línea (manejando \r\n de Windows/Google)
                 const rows = csvText.split(/\r?\n/).map(row => row.split(',').map(cell => cell.trim()));
-                // Asumiendo columnas: ID, Nombres, NumeroPases, Mesa
                 const guestData = rows.find(row => row[0] && row[0] === invitadoId);
 
-                passesLoading.style.display = 'none';
-
                 if (guestData) {
-                    passesContent.style.display = 'block';
+                    if (invitationContent) invitationContent.style.display = 'block';
+                    if (accessDenied) accessDenied.style.display = 'none';
+                    if (passesLoading) passesLoading.style.display = 'none';
+                    
                     document.getElementById('guest-names').textContent = guestData[1] || 'Invitados Especiales';
                     document.getElementById('guest-count').textContent = guestData[2] || '1';
+                    
+                    const passesContent = document.getElementById('passes-content');
+                    if (passesContent) passesContent.style.display = 'block';
                     
                     const tableNum = guestData[3] || '0';
                     const tableCard = document.getElementById('table-card');
@@ -155,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById('guest-table').textContent = tableNum;
                     }
 
-                    // Check confirmation status (Column 5 / index 4)
                     const confirmStatus = (guestData[4] || '').toUpperCase();
                     const rsvpButtons = document.getElementById('rsvp-buttons');
                     const rsvpConfirmed = document.getElementById('rsvp-confirmed');
@@ -168,18 +170,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         if (rsvpConfirmed) rsvpConfirmed.style.display = 'none';
                     }
                 } else {
-                    passesError.style.display = 'block';
+                    if (invitationContent) invitationContent.style.display = 'none';
+                    if (accessDenied) accessDenied.style.display = 'block';
+                    if (passesLoading) passesLoading.style.display = 'none';
                 }
             })
             .catch(err => {
                 console.error("Error cargando pases:", err);
-                passesLoading.style.display = 'none';
-                passesError.style.display = 'block';
+                if (passesLoading) passesLoading.style.display = 'none';
+                if (passesError) passesError.style.display = 'block';
             });
     } else {
-        // Vista general sin parámetro especial
-        passesLoading.style.display = 'none';
-        passesEmpty.style.display = 'block';
+        if (invitationContent) invitationContent.style.display = 'none';
+        if (accessDenied) accessDenied.style.display = 'block';
+        if (passesLoading) passesLoading.style.display = 'none';
     }
 
     // ======================================================
