@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     } else {
         if (invitationContent) invitationContent.style.display = 'none';
-        if (accessDenied) accessDenied.style.display = 'block';
+        if (accessDenied) accessDenied.style.display = 'none';
         if (passesLoading) passesLoading.style.display = 'none';
     }
 
